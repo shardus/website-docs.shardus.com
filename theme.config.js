@@ -15,9 +15,9 @@ const FEEDBACK_LINK_WITH_TRANSLATIONS = {
 };
 
 export default {
-  projectLink: "https://shardus.githut.io",
+  projectLink: "https://gitlab.com/shardus",
   defaultMenuCollapsed: true,
-  docsRepositoryBase: "https://gitlab.com/shardus/docs",
+  docsRepositoryBase: "https://gitlab.com/shardus/docs/new-docs",
   titleSuffix: " – Shardus",
   search: true,
   unstable_flexsearch: true,
@@ -69,47 +69,37 @@ export default {
         <link
           rel="mask-icon"
           href="/favicon/safari-pinned-tab.svg"
-          color="#ff0000"
+          color="#ed1b24"
         />
-        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-TileColor" content="#1f1f1f" />
         <meta httpEquiv="Content-Language" content="en" />
         <meta
           name="description"
           content={
             meta.description ||
-            "Shardus is a Node.js framework for building linearly scaleable decentralized applications."
+            "Shardus developer documentation for a Node.js framework that can build linearly scaleable decentralized applications."
           }
         />
         <meta
           name="og:description"
           content={
             meta.description ||
-            "Shardus is a Node.js framework for building linearly scaleable decentralized applications."
+            "Shardus developer documentation for a Node.js framework that can build linearly scaleable decentralized applications."
           }
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@shardusLedger" />
-        <meta
-          name="twitter:image"
-          content={
-            meta.image ||
-            "/img/logo.png"
-          }
-        />
+        <meta name="twitter:image" content={"/img/logo.png"} />
         <meta
           name="og:title"
           content={
-            title ? title + " – Shardus Documentation" : "Shardus Developer Docs: A Node.js Framework for Linear scaleable Decentralized Applications"
+            title
+              ? title + " – Shardus Documentation"
+              : "Shardus Developer Docs: A Node.js Framework for Linear scaleable Decentralized Applications"
           }
         />
-        <meta
-          name="og:image"
-          content={
-            meta.image ||
-            "/img/logo.png"
-          }
-        />
-        <meta name="apple-mobile-web-app-title" content="SharDocs" />
+        <meta name="og:image" content={"/img/logo.png"} />
+        <meta name="apple-mobile-web-app-title" content="Shardus Dev Docs" />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
