@@ -1,0 +1,9 @@
+{
+  "README": "Overview",
+  "development": "Development",
+  "considerations": "Considerations",
+  "security": "Security",
+  "testing": "Testing",
+  "debugging": "Debugging",
+  "deployment": "Deployment"
+}

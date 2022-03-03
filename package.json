@@ -1,7 +1,7 @@
 {
-  "name": "swr-site",
+  "name": "shardus-developer-docs",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is documentation tailored for developers with technical expertise that want to build decentralized applications using shardus.",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -9,24 +9,33 @@
     "start": "next start",
     "build": "next build"
   },
-  "author": "Shu Ding",
-  "license": "Apache-2.0",
+  "author": "Kyle Shifflett",
+  "contributors": [
+    "Erik Xavier",
+    "Kyle Shifflett",
+    "Gabriel Romualdo",
+    "Aaron Sullivan",
+    "Aamir Syed"
+  ],
+  "license": "Unlicensed",
   "dependencies": {
     "@reach/skip-nav": "^0.16.0",
     "focus-visible": "^5.1.0",
     "intersection-observer": "^0.10.0",
     "markdown-to-jsx": "^6.11.4",
-    "next": "^12.0.8",
+    "next": "^12.1.0",
     "nextra": "^2.0.0-alpha.24",
     "nextra-theme-docs": "^2.0.0-alpha.23",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-intersection-observer": "^8.26.2"
+    "react-intersection-observer": "^8.26.2",
+    "remark": "^14.0.2",
+    "sharp": "^0.30.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.16"
+    "postcss": "^8.4.7",
+    "tailwindcss": "^3.0.23"
   },
   "prettier": {
     "embeddedLanguageFormatting": "off",
