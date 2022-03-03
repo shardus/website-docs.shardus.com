@@ -7,6 +7,7 @@ const withNextra = require("nextra")({
 });
 
 module.exports = withNextra({
+  target: 'serverless',
   redirects: () => {
     return [
       {
