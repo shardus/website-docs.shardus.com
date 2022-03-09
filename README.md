@@ -18,3 +18,4 @@ And visit `localhost:3000` to preview your changes.
 - Erik Xavier
 - Gabriel Romualdo
 - [Kyle Shifflett](https://github.com/theDigg)
+- [Kaung MyatThu](https://github.com/kgmyatthu)
