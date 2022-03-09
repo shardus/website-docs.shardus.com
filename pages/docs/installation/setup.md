@@ -3,6 +3,8 @@ import Bleed from 'nextra-theme-docs/bleed'
 
 # Setup
 
+In order to develop decentralized applications using shardus, developer needs to use a set of [tools](../tools/README.md). These tools required specific tech stack to operate.
+
 <Callout emoji="🚨" type="error">
 
 Windows Users We recommend that Windows users follow the instructions [here](./windows) before following these setup instructions.

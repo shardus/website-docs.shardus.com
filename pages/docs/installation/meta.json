@@ -1,4 +1,5 @@
 {
-  "setup": "Setup",
+  "setup": "Prerequisites",
+  "linux": "Linux",
   "windows": "Windows"
 }
