@@ -12,12 +12,12 @@ module.exports = withNextra({
     return [
       {
         source: "/docs",
-        destination: "/docs/installation/quickstart",
+        destination: "/docs/quickstart",
         statusCode: 301,
       },
       {
         source: "/docs",
-        destination: "/docs/installation/quickstart",
+        destination: "/docs/quickstart",
         statusCode: 302,
       },
       {

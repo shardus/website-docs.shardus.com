@@ -6,7 +6,7 @@ Hello Cloud is a simple dapp designed to help you learn the fundamentals of
 shardus. The function of the dapp is simple: allow the user to set some small
 state into the network (as a number) and then read that state back.
 
-If you went through the [quickstart guide](/docs/installation/quickstart), you
+If you went through the [quickstart guide](/docs/quickstart), you
 will already have been introduced to the Hello Cloud dapp.
 
 ## Installation
