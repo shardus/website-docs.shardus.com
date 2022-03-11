@@ -8,8 +8,9 @@ The project uses [pnpm](https://pnpm.io), [Nextra](https://nextra.vercel.app) an
 pnpm install
 pnpm dev
 ```
+And visit `localhost:3000` or `localhost:[port]` (if you set different port) to preview your changes. 
 
-And visit `localhost:3000` to preview your changes.
+`NOTE:`Sometime we'd have shardus network running in background while working on this resulting in port `3000` collision. `pnpm dev` command will automatically occupy available port but if it is still failing, try setting custom port. To run the dev docs on different port number please do `pnpm customPort 8888`.
 
 ## Contributors
 
@@ -18,4 +19,4 @@ And visit `localhost:3000` to preview your changes.
 - Erik Xavier
 - Gabriel Romualdo
 - [Kyle Shifflett](https://github.com/theDigg)
-- [Kaung MyatThu](https://github.com/kgmyatthu)
+- [Kaung Myatthu](https://github.com/kgmyatthu)
