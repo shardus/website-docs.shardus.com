@@ -10,8 +10,7 @@ single and multiple node networks, and interacting with the dapp.
 ## Installation
 
 <Callout emoji="⚠️" type="error">
-For the time being, you need to have the rust [build toolchain](https://www.rust-lang.org/tools/install)
-installed locally to run shardus.
+If you encounters major problems doing `npm run start` or `npm i` checkout this [guide](./installation/setup)
 </Callout>
 
 Start by cloning `Hello Shardus`:
@@ -103,3 +102,5 @@ Clean databases and logs from the last run:
 ```bash
 shardus clean
 ```
+## Congratulation
+Congratulations !!, you've successfully install, launch, stop, clean shardus network and interact with it. You can know proceed to next section to learn finer details of how to develop decentralized applications with shardus technology. To [Getting Started](./gettingstarted)
