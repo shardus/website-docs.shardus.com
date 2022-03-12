@@ -12,14 +12,14 @@ The repository for this guide can be seen [here](https://gitlab.com/shardus/appl
 Skip this entire step if you successfully followed [quickstart](./quickstart) section 
 </Callout>
 
-We need a set of tools with specific version to successfully use `@shardus/core`. This tech stack include following.
+We need a set of tools with specific versions to successfully use `@shardus/core`. This tech stack include following.
 
 - Node version 16.11.1
-- Python3
+- Python3.9 (or latest)
 - Rust
 
 ### Configuring node version
-It is generally recommend to use `nvm` for node version management for anyone serious about nodejs development. Otherwise developers may need to install specific node version mannually. 
+It is generally recommend to use `nvm` for node version management to anyone serious about nodejs development. Otherwise developers may need to install specific node version mannually. 
 
 `nvm` tool allow you have switch quickly between different node versions.
 
@@ -29,7 +29,7 @@ After installing nvm on the machine, developers may then able to switch to speci
 
 
 ### Configuring python3
-Installing python on unix machine are fairly straight forward.
+Installing python on unix machine is fairly straight forward.
 
 <Callout emoji="!" type="warning">
 Skip this entire step if you successfully followed [quickstart](./quickstart) section 
@@ -1010,3 +1010,5 @@ Output:
   }
 }
 ```
+## What's next
+We recommend to checkout this [guide](./exampes/coin-app-template) 

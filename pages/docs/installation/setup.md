@@ -6,7 +6,7 @@ Developing decentralized application on top of shardus usually require a set of 
 
 - Node.js (16.11.1)
 - npm (8.0.0)
-- Python3
+- Python3.9 (or latest)
 - [Rust](https://www.rust-lang.org/tools/install)
 
 ## Configuring node version
@@ -19,14 +19,14 @@ To install `nvm` check [here](https://github.com/nvm-sh/nvm).
 After installing nvm on the machine, developers may then able to switch to specific `nvm` version by doing `nvm install 16.11.1` and `nvm use 16.11.1`.
 
 
-## Configuring python3
+## Configuring python3.9
 Installing python on unix machine are fairly straight forward.
 
 <Callout emoji="!" type="warning">
 This step is optional if your machine have python3 already configured
 </Callout>
 
-For example to install python3 on arch linux:
+For example to install python3.9 on arch linux:
 ```bash
 sudo pacman -Sy python3.9
 ```
@@ -37,6 +37,16 @@ sudo apt-get install python3.9
 The exact command would differs from one linux system to another depending on what package management tools is being setup on the machine.
 
 For windows users this would include downloading python binaries for windows and installing it. Same goes for mac systems.
+
+<Callout emoji="!" type="warning">
+It is known issue that node-gyp would cause problem without the lastest python version configured.
+</Callout>
+
+If you have multiple python version on your machine and require to point npm to use specific python version, run this command:
+
+```
+npm config set python /path/to/python3.9
+```
 
 ## Configuring rust
 

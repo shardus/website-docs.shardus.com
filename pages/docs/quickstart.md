@@ -9,9 +9,6 @@ single and multiple node networks, and interacting with the dapp.
 
 ## Installation
 
-<Callout emoji="⚠️" type="error">
-If you encounters major problems doing `npm run start` or `npm i` checkout this [guide](./installation/setup)
-</Callout>
 
 Start by cloning `Hello Shardus`:
 
@@ -31,9 +28,13 @@ npm install
 # OR: yarn install
 ```
 
+<Callout emoji="⚠️" type="error">
+If you encounters major problems doing `npm run start` or `npm i` checkout this [guide](./installation/setup)
+</Callout>
+
 ## Single node
 
-Start the `seed-node-server`, `monitor-server`, and your `index.ts` server:
+Start the `seed-node-server`, `monitor-server`, and your `index.js` server:
 
 ```bash
 npm start
