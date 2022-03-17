@@ -4,6 +4,7 @@ node_modules
 yarn-error.log
 .yalc
 yalc.lock
+out
 
 public/*.st
 public/*.toml
