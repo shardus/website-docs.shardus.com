@@ -1,7 +1,7 @@
 image: node:16.11.1
 
 variables:
-  NODE_ENV: 'production'
+  NODE_ENV: "production"
 
 before_script:
   - npm install -g pnpm
