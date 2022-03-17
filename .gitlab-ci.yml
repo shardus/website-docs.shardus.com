@@ -14,8 +14,10 @@ cache:
 pages:
   script:
     - pnpm install && pnpm build && pnpm run export
+    - rm -rf public && mkdir public
+    - mv out/* public/.
   artifacts:
     paths:
-      - out
+      - public
   only:
     - main
