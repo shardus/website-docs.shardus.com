@@ -1,0 +1,21 @@
+image: node:16.11.1
+
+before_script:
+  - npm install
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .next/cache/
+
+pages:
+  script:
+    - npm run build && npm run export
+    - rm -rf public/*
+    - mv out/* public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
