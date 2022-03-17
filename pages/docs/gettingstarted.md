@@ -333,13 +333,17 @@ For the simplicity of this guide we'll use a variable to act as our database to 
 let accounts: Accounts = {}; // this is our database
 ```
 #### Creating rest api endpoints
+Shardus provides a few methods for creating API routes. 
+[registerExternalPost](./api/interface/registerExternalPost) 
+and [registerExternalGet](./api/interface/registerExternalGet) will be used here to create an API we can fetch data from.
+
 We will have 3 rest api endpoints. 
 
 `/inject` post request endpoint to inject transaction.
 
 `/list/:id` get request endpoint to retrieve todo list of a user by providing its id. ID here simply is a hash of the username.
 
-`/accounts` get request endpoint to retrieve to entire database so you could have an inside on structure of accounts.
+`/accounts` get request endpoint to retrieve entire database (our in-memory object) so you could have some insights on structure of `accounts`.
 
 ```ts
 dapp.registerExternalPost('inject', (req, res) => {
@@ -367,7 +371,7 @@ dapp.registerExternalGet('accounts', (req, res) => {
 });
 ```
 #### Shardus setup function
-Shardus takes a set of setup function that require dapp developer to implement. They look like this.
+Shardus takes a set of setup [functions](./api/interface/setup/README) that require dapp developer to implement. They look like this.
 ```ts
 dapp.setup({
   validate(tx) {},
@@ -390,7 +394,7 @@ dapp.setup({
 We are now at most important part of this guide which is to implement these setup functions forming the application layer.
 
 #### validate()
-Start by implementing validate funcntion. The purpose of this function is to ensure certain requirements are met before allowing the transaction to get applied.
+Start by implementing [validate](./api/interface/setup/validate) funcntion. The purpose of this function is to ensure certain requirements are met before allowing the transaction to get applied.
 
 <Callout emoji="⚠️" type="warning">
 
@@ -443,12 +447,19 @@ For this application, we will be demonstrating a todo list network where user ca
 ```
 
 #### apply()
-apply is the function responsible for mutating your application state. 
+[apply()](./api/interface/setup/apply)is the function responsible for mutating your application state. 
 This function is the only place where any change to the database (or the accounts object in this example) can occur. 
 This is where we will use our `validate()` helper function we created earlier. 
 If the transaction that comes in passes our validation function, we can apply this transaction to the state of our application. 
 Within apply we must return an applyResponse that we can get by calling `dapp.createApplyResponse(txId, tx.timestamp)`, 
 passing in the transaction id (the hash of the transaction object passed into apply), and the `timestamp` field from the transaction object. Use the following code as an example of how to implement this function:
+
+<Callout emoji="💡" type="default">
+
+Here's a more in depth explanation of [createApplyResponse](./api/interface/createApplyResponse)
+
+</Callout>
+
 ```ts
   apply(tx: Transaction, wrappedAccounts: WrappedAccounts) {
     console.log('==> apply');
@@ -475,7 +486,7 @@ passing in the transaction id (the hash of the transaction object passed into ap
 ```
 
 #### crack()
-The `crack()` function is responsible for parsing the public keys of the accounts being affected from this transaction, 
+The [crack()](./api/interface/setup/crack) function is responsible for parsing the public keys of the accounts being affected from this transaction, 
 and returning a result object that resembles this: 
 ```ts
 { 
@@ -504,7 +515,7 @@ and the `targetKeys` property should contain the public key(s) of the account(s)
   },
 ```
 #### setAccountData()
-After the `apply` function has doesn its duty `setAccountData` will update our accounts object using a list of account records that shardus passes to this func.
+After the `apply` function has doesn its duty [setAccountData](./api/interface/setup/setAccountData) will update our accounts object using a list of account records that shardus passes to this func.
 Use the following code to implement this function.
 ```ts
   setAccountData(accountsToSet: Account[]) {
@@ -515,7 +526,7 @@ Use the following code to implement this function.
 
 #### resetAccountData()
 Shardus may need to restore previous account records to the node's database, and in order to do that we provide `shadus.setup` with a function called
-`resetAccountData`.
+[resetAccountData()](./api/interface/setup/resetAccountData).
 
 <Callout emoji="!" type="warning">
 All we need to do here is to loop through the `accountBackupCopies` passed into the function. Grab the account from our database using the same backup copy id, and set the account we grabbed from the copy.
@@ -532,7 +543,7 @@ resetAccountData(accountBackupCopies) {
 ```
 
 #### deleteAccountData()
-For `deleteAccountData`, loop through the `addressList` passed in as an argument and delete the account in your database associated with each address. You can use the following code to accomplish this:
+For [deleteAccountData()](./api/interface/setup/deleteAccountData), loop through the `addressList` passed in as an argument and delete the account in your database associated with each address. You can use the following code to accomplish this:
 ```ts
   deleteAccountData(addressList: string[]) {
     console.log('==> deleteAccountData');
@@ -541,7 +552,8 @@ For `deleteAccountData`, loop through the `addressList` passed in as an argument
 ```
 
 #### deleteLocalAccountData()
-The `deleteLocalAccountData` function is used to wipe everything thing in node's database, thus local account data. 
+The [deleteLocalAccountData()](./api/interface/setup/deleteLocalAccountData), loop through the `addressList` passed in as an argument and delete the account in your database associated with each address. You can use the following code to accomplish this:
+ function is used to wipe everything thing in node's database, thus local account data. 
 Use the following code to implement this function:
 ```ts
 deleteLocalAccountData () {

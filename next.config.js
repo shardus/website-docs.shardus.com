@@ -7,24 +7,9 @@ const withNextra = require("nextra")({
 });
 
 module.exports = withNextra({
-  target: 'serverless',
-  redirects: () => {
-    return [
-      {
-        source: "/docs",
-        destination: "/docs/quickstart",
-        statusCode: 301,
-      },
-      {
-        source: "/docs",
-        destination: "/docs/quickstart",
-        statusCode: 302,
-      },
-      {
-        source: "/examples",
-        destination: "/docs/examples/README",
-        statusCode: 302,
-      },
-    ];
+  presets: ['@next/babel'],  
+  images: {
+    loader: 'akamai',
+    path: '',
   },
 });

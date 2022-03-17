@@ -7,6 +7,8 @@ Shardus requires you to implement all the necessary SDK functions to be setup wi
 `* = required`
 
 * [apply](./apply)*
+* `validateTxnFields` (deprecated. Please use `validate()` instead)
+* [validate](./validate)*
 * [calculateAccountHash](./calculateAccountHash)*
 * [canDebugDropTx](./canDebugDropTx)
 * [close](./close)*
@@ -15,13 +17,13 @@ Shardus requires you to implement all the necessary SDK functions to be setup wi
 * [getAccountDataByList](./getAccountDataByList)*
 * [getAccountDataByRange](./getAccountDataByRange)*
 * [getAccountDebugValue](./getAccountDebugValue)
-* [getKeyFromTransaction](./getKeyFromTransaction)*
+* `getKeyFromTransaction` (deprecated. Please use `crack()` instead)
+* [crack](./crack)*
 * [getRelevantData](./getRelevantData)*
 * [resetAccountData](./resetAccountData)*
 * [setAccountData](./setAccountData)*
 * [sync](./sync)
 * [updateAccountFull](./updateAccountFull)*
 * [updateAccountPartial](./updateAccountPartial)*
-* [validateTxnFields](./validateTxnFields)*
 
 ---

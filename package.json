@@ -9,7 +9,8 @@
     "debug": "NODE_OPTIONS='--inspect' next",
     "start": "next start",
     "build": "next build",
-    "now-build": "next build"
+    "now-build": "next build",
+    "export": "next export"
   },
   "author": "Kyle Shifflett",
   "contributors": [

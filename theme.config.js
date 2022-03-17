@@ -1,12 +1,17 @@
 // import { useRouter } from "next/router";
 import Image from "next/image";
+import logo from './public/img/logo.png';
+
+const imgLoader = ({src}) => {
+  return `${src}`
+}
 
 const Logo = ({ height }) => (
-  <Image src="/img/logo.png" height={50} width={50} alt="Logo" />
+  <Image loader={imgLoader} src="/img/logo.png" height={50} width={50} alt="logo" />
 );
 
-const Shardus = ({ height = 20 }) => (
-  <Image src="/img/logo.png" height={30} width={30} alt="Logo" className="mt-24"/>
+const Shardus = ({ height }) => (
+  <Image loader={imgLoader} src="/img/logo.png" height={30} width={30} alt="Logo" className="mt-24"/>
 );
 
 const FEEDBACK_LINK_WITH_TRANSLATIONS = {
@@ -46,7 +51,7 @@ export default {
   },
   head: ({ title, meta }) => {
     return (
-      <>
+      <head>
         {/* Favicons, meta */}
         <link
           rel="apple-touch-icon"
@@ -106,7 +111,7 @@ export default {
           media="print"
           onLoad="this.media='all'"
         />
-      </>
+      </head>
     );
   },
   footerEditLink: () => {

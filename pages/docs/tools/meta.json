@@ -1,7 +1,6 @@
 {
   "README": "Overview",
   "shardus-cli-tool": "Shardus CLI Tool",
-  "shardus-db": "Shardus DB",
   "monitor-client": "Monitor Client",
   "monitor-server": "Monitor Server",
   "archive-server": "Archive Server",

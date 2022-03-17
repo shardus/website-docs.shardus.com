@@ -9,6 +9,13 @@ state into the network (as a number) and then read that state back.
 If you went through the [quickstart guide](/docs/quickstart), you
 will already have been introduced to the Hello Cloud dapp.
 
+<Callout emoji="!!" type="default">
+
+This app is a typescript version of the app you've seen on [quickstart](../quickstart) section
+
+</Callout>
+
+
 ## Installation
 
 First, clone and install the repo:

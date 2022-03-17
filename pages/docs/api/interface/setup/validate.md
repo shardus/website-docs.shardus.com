@@ -1,3 +1,6 @@
+import Callout from 'nextra-theme-docs/callout'
+import Features from 'components/features'
+
 # validate
 
 Shardus expects a function called `validate` to be passed in to `setup`. This
@@ -88,3 +91,8 @@ validate(tx) {
 
 }
 ```
+
+<Callout emoji="🚀" type="error">
+  Although validation happen in validate function, this does not mean all the validation should happen inside validate.
+  This function ideally would be only used to validate incoming transactions. Dapp developer may decide other type of validation in `apply()` function instead. This is due to major sharding implications and restrictions    All you can do is check the TX fields because the data may not even exist on on the node yet.  Also checking data is slow and we want a fast check to throw out badly formatted transactions.   The last reason is that we have to have a queue to support partial ordering of transactions for the purpose of consensus.  Even if a node had the data it would not be safe to read it too soon.
+</Callout>
