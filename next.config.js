@@ -8,7 +8,7 @@ const withNextra = require("nextra")({
 
 module.exports = withNextra({
   presets: ['@next/babel'],  
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/name-of-repository' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/docs/shardus-developer-docs' : '',
   images: {
     loader: 'akamai',
     path: '',
