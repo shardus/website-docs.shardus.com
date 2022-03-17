@@ -7,11 +7,11 @@ const imgLoader = ({src}) => {
 }
 
 const Logo = ({ height }) => (
-  <Image loader={imgLoader} src="/img/logo.png" height={50} width={50} alt="logo" />
+  <Image loader={imgLoader} src={logo} height={50} width={50} alt="logo" />
 );
 
 const Shardus = ({ height }) => (
-  <Image loader={imgLoader} src="/img/logo.png" height={30} width={30} alt="Logo" className="mt-24"/>
+  <Image loader={imgLoader} src={logo} height={30} width={30} alt="Logo" className="mt-24"/>
 );
 
 const FEEDBACK_LINK_WITH_TRANSLATIONS = {
