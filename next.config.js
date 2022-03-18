@@ -8,8 +8,8 @@ const withNextra = require("nextra")({
 
 module.exports = withNextra({
   presets: ['@next/babel'],  
-  assetPrefix: process.env.NODE_ENV === 'gitlab' ? '/docs/shardus-developer-docs' : '',
-  basePath: process.env.NODE_ENV === 'gitlab' ? '/docs/shardus-developer-docs' : '',
+  // assetPrefix: process.env.NODE_ENV === 'gitlab' ? '/docs/shardus-developer-docs' : '',
+  // basePath: process.env.NODE_ENV === 'gitlab' ? '/docs/shardus-developer-docs' : '',
   images: {
     loader: 'akamai',
     path: '',
