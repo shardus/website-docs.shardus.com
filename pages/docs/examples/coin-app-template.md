@@ -68,19 +68,19 @@ Your `package.json` file should look something like this now:
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2",
+    "@shardus/core": "^2.5.2",
+    "@shardus/crypto-utils": "^4.0.3",
     "deepmerge": "^4.2.2",
-    "@shardus/core": "^2.5.1",
-    "@shardus/crypto-utils": "^4.0.4",
+    "got": "^9.6.0",
     "vorpal": "^1.12.0"
   },
   "devDependencies": {
-    "@shardus/archiver": "^3.2.3",
-    "cross-env": "^7.0.2",
-    "execa": "^4.0.3",
-    "@shardus/monitor-server": "^2.0.1",
-    "pm2": "^4.4.1",
-    "shelljs": "^0.8.4",
+    "@shardus/archiver": "3.2.4",
+    "@shardus/monitor-server": "2.0.3",
+    "cross-env": "^5.2.0",
+    "execa": "^1.0.0",
+    "pm2": "^5.1.2",
+    "shelljs": "^0.8.3",
     "yarpm": "^0.2.1"
   }
 }
@@ -100,8 +100,8 @@ Paste the code below into your `start.js` file
 ```javascript
 const execa = require('execa');
 
-const archiverPath = require.resolve('archive-server');
-const monitorPath = require.resolve('monitor-server');
+const archiverPath = require.resolve('@shardus/archiver');
+const monitorPath = require.resolve('@shardus/monitor-server');
 
 async function main() {
   try {
@@ -135,14 +135,18 @@ main();
 Paste the code below into your `clean.js` file
 
 ```javascript
-const { rm } = require('shelljs');
+const {rm} = require('shelljs');
 
 async function main() {
   try {
-    rm('-rf', './.pm2 ./db ./logs ./statistics.tsv'.split(' '));
-    rm('-rf', './archiver-db.sqlite'.split(' '));
+    rm(
+      '-rf',
+      './.pm2 ./db ./logs ./statistics.tsv ./archiver-db* ./archiver-logs ./monitor-logs ./db-old-*'.split(
+        ' '
+      )
+    );
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 main();
@@ -215,7 +219,6 @@ At the top of our `index.js` file, import the following modules
 const fs = require('fs');
 const path = require('path');
 const merge = require('deepmerge');
-const stringify = require('fast-stable-stringify');
 const shardus = require('@shardus/core');
 const crypto = require('@shardus/crypto-utils');
 ```
@@ -309,17 +312,6 @@ Here we will create a database to host all of the accounts in our network. For t
 ```javascript
 let accounts = {};
 
-// This will be used when creating new accounts
-function createAccount(id) {
-  const account = {
-    id: id,
-    data: { balance: 0 },
-    hash: '',
-    timestamp: 0,
-  };
-  account.hash = crypto.hashObj(account);
-  return account;
-}
 ```
 
 ## Setup API
@@ -375,28 +367,25 @@ Now it's time to implement the `setup` functions we pass into Shardus. Paste the
 
 ```javascript
 dapp.setup({
-  validateTransaction(tx) {},
-  validateTxnFields(tx) {},
-  apply(tx, wrappedStates) {},
-  getKeyFromTransaction(tx) {},
+  validate(tx) {},
+  apply(tx, wrappedAccounts) {},
+  crack(tx){},
+  setAccountData(accountToSet) {},
+  resetAccountData(accountBackupCopies) {},
+  deleteAccountData(addressList) {},
   deleteLocalAccountData() {},
-  setAccountData(accountRecords) {},
   getRelevantData(accountId, tx) {},
+  getAccountDataByRange(accountStart, accountEnd, tsStart, tsEnd, maxRecords) {},
+  getAccountDataByList(addressList) {},
   getAccountData(accountStart, accountEnd, maxRecords) {},
   updateAccountFull(wrappedData, localCache, applyResponse) {},
   updateAccountPartial(wrappedData, localCache, applyResponse) {},
-  getAccountDataByRange(accountStart, accountEnd, tsStart, tsEnd, maxRecords) {},
   calculateAccountHash(account) {},
-  resetAccountData(accountBackupCopies) {},
-  deleteAccountData(addressList) {},
-  getAccountDataByList(addressList) {},
   close() {},
 });
 ```
-
-### validateTransaction
-
-Start by implementing [validateTransaction](../main-concepts/security/validation.md). The purpose of this function is to ensure certain requirements are met to before allowing the transaction to get applied.
+#### validate
+Start by implementing [validate](../api/interface/setup/validate) funcntion. The purpose of this function is to ensure certain requirements are met before allowing the transaction to get applied.
 
 <Callout emoji="⚠️" type="warning">
 
@@ -404,103 +393,51 @@ It is the app developer's responsibility to ensure that the network is secure by
 
 </Callout>
 
-For this application, we will be demonstrating a horrifying payment network where users can create tokens out of thin air and send them to each other. We will be validating 2 different transactions here. Use the following code as an example of how to implement this function. We will use this function later on when we implement `apply`.
+For this application, we will be demonstrating a todo list network where user can create a todo list tied to specific user. For the simplicity of this guide each user will add, remove the list of another user.
+```ts
+  validate(tx: Transaction) {
+    console.log('==> validate');
+    if (
+      tx.accountId === undefined ||
+      typeof tx.timestamp !== 'number' ||
+      tx.type === undefined
+    ) {
+      return {
+        success: false,
+        reason: 'Critical Attributes missing',
+      };
+    }
 
-```javascript
-validateTransaction (tx) {
-  const response = {
-    result: 'fail', // Assume it fails by default
-    reason: 'Transaction is not valid.'
-  }
-
-  // Validate tx types here
-  switch (tx.type) {
-    case 'create':
-      // No validation whatsoever. Anyone can create tokens out of thin air
-      response.result = 'pass'
-      response.reason = 'This transaction is valid!'
-      return response
-    case 'transfer':
-      const from = accounts[tx.from]
-      if (typeof from === 'undefined' || from === null) {
-        response.reason = '"from" account does not exist.'
-        return response
+    switch (tx.type) {
+      case 'remove_todo': {
+        if (!Array.isArray(tx.todo)) {
+          return {
+            success: false,
+            reason: 'Todo list must be an array',
+          };
+        }
+        return {
+          success: true,
+          reason: '',
+        };
       }
-      if (tx.amount < 0) {
-        response.reason = '"amount" must be non-negative.'
-        return response
+      case 'add_todo': {
+        if (!Array.isArray(tx.todo)) {
+          return {
+            success: false,
+            reason: 'Todo list must be an array',
+          };
+        }
+        return {
+          success: true,
+          reason: '',
+        };
       }
-      if (from.data.balance < tx.amount) {
-        response.reason = '"from" account does not have sufficient funds.'
-        return response
-      }
-      response.result = 'pass' // Passed all validation checks so it's good to go
-      response.reason = 'This transaction is valid!'
-      return response
-    default:
-      response.reason = '"type" must be "create" or "transfer".'
-      return response
-  }
-}
+    }
+  },
 ```
 
-<Callout emoji="💡" type="default">
-
-This function is not used by Shardus internally. It only serves as a helper function to separate our validation code from `apply`.
-
-</Callout>
-
-### validateTxnFields
-
-This function is used by Shardus for validating the types of data within the transaction itself. In this example, it's going to look very similar to `validateTransaction` in the sense that we validate the fields on a transaction based on the transaction `type`. Use the following code as an example of how to implement this function. The only requirement is that it returns an object that resembles this: `{ success: true, reason: 'all good', txnTimestamp: tx.timestamp }`
-
-```javascript
-validateTxnFields (tx) {
-  let success = true
-  let reason = 'Types are correct'
-  const txnTimestamp = tx.timestamp
-
-  if (typeof tx.type !== 'string') {
-    success = false
-    reason = '"type" must be a string.'
-    throw new Error(reason)
-  }
-  if (typeof tx.from !== 'string') {
-    success = false
-    reason = '"from" must be a string.'
-    throw new Error(reason)
-  }
-  if (typeof tx.to !== 'string') {
-    success = false
-    reason = '"to" must be a string.'
-    throw new Error(reason)
-  }
-  if (typeof tx.amount !== 'number') {
-    success = false
-    reason = '"amount" must be a number.'
-    throw new Error(reason)
-  }
-  if (typeof tx.timestamp !== 'number') {
-    success = false
-    reason = '"timestamp" must be a number.'
-    throw new Error(reason)
-  }
-
-  return {
-    success,
-    reason,
-    txnTimestamp
-  }
-}
-```
-
-<Callout emoji="⚠️" type="warning">
-
-In more complex examples, you'll want to add more granular conditional flow so that you only validate fields in a transaction specific to that transaction type.
-
-</Callout>
-
-### apply
+#### apply
 
 [apply](../api/interface/setup/apply.md) is the function responsible for mutating your application state. This function is the only place where any change to the database (or the `accounts` object in this example) can occur. This is where we will use our `validateTransaction` helper function we created earlier. If the transaction that comes in passes our validation function, we can apply this transaction to the state of our application. Within `apply` we must return an `applyResponse` that we can get by calling `dapp.createApplyResponse(txId, tx.timestamp)`, passing in the transaction id (the hash of the transaction object passed into apply), and the timestamp field from the transaction object. Use the following code as an example of how to implement this function:
 
@@ -511,93 +448,111 @@ Here's a more in depth explanation of [createApplyResponse](../api/interface/cre
 </Callout>
 
 ```javascript
-apply (tx, wrappedStates) {
-  // Validate the tx
-  const { result, reason } = this.validateTransaction(tx)
-  if (result !== 'pass') {
-    throw new Error(`invalid transaction, reason: ${reason}. tx: ${JSON.stringify(tx)}`)
-  }
-  // Create an applyResponse which will be used to tell Shardus that the tx has been applied
-  const txId = crypto.hashObj(tx) // compute txId from tx
-  const applyResponse = dapp.createApplyResponse(txId, tx.timestamp)
+  apply(tx, wrappedStates){
+    const txId = crypto.hashObj(tx)
+    const txTimestamp = tx.timestamp
 
-  // Apply the tx
-  switch (tx.type) {
-    case 'create': {
-      // Get the to account
-      const to = wrappedStates[tx.to].data
-      // Increment the to accounts balance
-      to.data.balance += tx.amount
-      // Update the to accounts timestamp
-      to.timestamp = tx.timestamp
-      break
-    }
-    case 'transfer': {
-      // Get the from and to accounts
-      const from = wrappedStates[tx.from].data
-      const to = wrappedStates[tx.to].data
-      // Decrement the from accounts balance
-      from.data.balance -= tx.amount
-      // Increment the to accounts balance
-      to.data.balance += tx.amount
-      // Update the from accounts timestamp
-      from.timestamp = tx.timestamp
-      // Update the to accounts timestamp
-      to.timestamp = tx.timestamp
-      break
-    }
-  }
-  return applyResponse
-}
+    console.log('DBG', 'attempting to applytx', txId, '...')
+    const applyResponse = dapp.createApplyResponse(txId, txTimestamp)
+
+      // Apply the tx
+      switch (tx.type) {
+        case 'create': {
+          // Get the to account
+          const to = wrappedStates[tx.to].data
+          if (typeof to === 'undefined' || to === null) {
+            throw new Error(`account '${tx.to}' missing. tx: ${JSON.stringify(tx)}`)
+          }
+          // Increment the to accounts balance
+          to.data.balance += tx.amount
+          // Update the to accounts timestamp
+          to.timestamp = txTimestamp
+          console.log('DBG', 'applied create tx', txId, accounts[tx.to])
+          break
+        }
+        case 'transfer': {
+          // Get the from and to accounts
+          const from = wrappedStates[tx.from].data
+          if (typeof from === 'undefined' || from === null) {
+            throw new Error(`from account '${tx.to}' missing. tx: ${JSON.stringify(tx)}`)
+          }
+          const to = wrappedStates[tx.to].data
+          if (typeof to === 'undefined' || to === null) {
+            throw new Error(`to account '${tx.to}' missing. tx: ${JSON.stringify(tx)}`)
+          }
+          // Decrement the from accounts balance
+          from.data.balance -= tx.amount
+          // Increment the to accounts balance
+          to.data.balance += tx.amount
+          // Update the from accounts timestamp
+          from.timestamp = txTimestamp
+          // Update the to accounts timestamp
+          to.timestamp = txTimestamp
+          console.log('DBG', 'applied transfer tx', txId, accounts[tx.from], accounts[tx.to])
+          break
+        }
+      }
+    return applyResponse
+  },
 ```
 
-### getKeyFromTransaction
-
-The [getKeyFromTransaction](../api/interface/setup/getKeyFromTransaction.md) function is responsible for parsing the public keys of the accounts being affected from this transaction, and returning a result object that resembles this: `{ sourceKeys: [tx.from], targetKeys: [tx.to], allKeys: [tx.from, tx.to], timestamp: tx.timestamp }`. The `sourceKeys` property should contain the public key of the account that initiated the transaction, and the `targetKeys` property should contain the public key(s) of the account(s) being targeted. `allKeys` should contain all the `sourceKeys` and `targetKeys`. Use the following code as an example of how to implement this function:
-
-```javascript
-getKeyFromTransaction (tx) {
-  const result = {
-    sourceKeys: [],
-    targetKeys: [],
-    allKeys: [],
-    timestamp: tx.timestamp
-  }
-  switch (tx.type) {
-    case 'create':
-      result.targetKeys = [tx.to]
-      break
-    case 'transfer':
-      result.targetKeys = [tx.to]
-      result.sourceKeys = [tx.from]
-      break
-  }
-  result.allKeys = result.allKeys.concat(result.sourceKeys, result.targetKeys)
-  return result
+#### crack
+The [crack()](./api/interface/setup/crack) function is responsible for parsing the public keys of the accounts being affected from this transaction, 
+and returning a result object that resembles this: 
+```ts
+{ 
+  sourceKeys: [tx.from], 
+  targetKeys: [tx.to], 
+  allKeys: [tx.from, tx.to], timestamp: tx.timestamp 
 }
 ```
+The `sourceKeys` property should contain the public key of the account that initiated the transaction, 
+and the `targetKeys` property should contain the public key(s) of the account(s) being targeted. 
+`allKeys` should contain all the `sourceKeys` and `targetKeys`. Use the following code as an example of how to implement this function:
 
-<Callout emoji="⚠️" type="warning">
+```js
+  crack(tx){
+    const keys = {
+      sourceKeys: [],
+      targetKeys: [],
+      allKeys: [],
+      timestamp: tx.timestamp,
+    }
+    switch (tx.type) {
+      case 'create':
+        keys.targetKeys = [tx.to]
+        keys.sourceKeys = [tx.to]
+        break
+      case 'transfer':
+        keys.targetKeys = [tx.to]
+        keys.sourceKeys = [tx.from]
+        break
+    }
+    keys.allKeys = [...keys.sourceKeys, ...keys.targetKeys]
+    return {
+      id: crypto.hashObj(tx),
+      timestamp: tx.timestamp,
+      keys: keys
+    }
+  },
+```
 
-Since the `create` transaction is going to act as a faucet for creating tokens, it does not have a source account.
+#### deleteAccountData
 
-</Callout>
-
-### deleteAccountData
-
-For [deleteAccountData](../api/interface/setup/deleteAccountData.md), loop through the `addressList` passed in as an argument and delete the account in your database associated with each address. You can use the following code to accomplish this:
+For [deleteAccountData](../api/interface/setup/deleteAccountData), loop through the `addressList` passed in as an argument and delete the account in your database associated with each address. You can use the following code to accomplish this:
 
 ```javascript
 deleteAccountData (addressList) {
+  console.log('==> deleteAccountData')
   for (const address of addressList) {
     delete accounts[address]
   }
 }
 ```
 
-### deleteLocalAccountData
+#### deleteLocalAccountData
 
-The [deleteLocalAccountData](../api/interface/setup/deleteLocalAccountData.md) function is used to wipe everything in the database. Use the following code to implement this function:
+The [deleteLocalAccountData](../api/interface/setup/deleteLocalAccountData) function is used to wipe everything in the database. Use the following code to implement this function:
 
 ```javascript
 deleteLocalAccountData () {
@@ -605,37 +560,45 @@ deleteLocalAccountData () {
 }
 ```
 
-### setAccountData
+#### setAccountData
 
-After the `apply` function has done its duty, [setAccountData](../api/interface/setup/setAccountData.md) will update our `accounts` object using a list of account records that Shardus passes to this function. Use the following code to implement this function:
+After the `apply` function has done its duty, [setAccountData](../api/interface/setup/setAccountData) will update our `accounts` object using a list of account records that Shardus passes to this function. Use the following code to implement this function:
 
 ```javascript
-setAccountData(accountRecords) {
-  for (const account of accountRecords) {
-    accounts[account.id] = account
-  }
-}
+  setAccountData(accountsToSet) {
+    console.log('==> setAccountData');
+    accountsToSet.forEach(account => (accounts[account.id] = account));
+  },
 ```
 
-### getRelevantData
+#### getRelevantData
 
-[getRelevantData](../api/interface/setup/getRelevantData.md) is where we can create accounts _by utilizing the createAccount function we implemented earlier_. Of course if the account already exists, all we have left to do is return a `wrappedResponse` that we can get by calling the [createWrappedResponse](../api/interface/createWrappedResponse.md) function exposed by shardus.
+[getRelevantData](../api/interface/setup/getRelevantData) is where we can create accounts. Of course if the account already exists, all we have left to do is return a `wrappedResponse` that we can get by calling the [createWrappedResponse](../api/interface/createWrappedResponse) function exposed by shardus.
 
 The following demonstrates an implementation of `getRelevantData` that will work for this basic application.
 
 ```javascript
-getRelevantData (accountId, tx) {
-  let account = accounts[accountId]
-  let accountCreated = false
-  // Create the account if it doesn't exist
-  if (typeof account === 'undefined' || account === null) {
-    account = createAccount(accountId)
-    accountCreated = true
-  }
-  // Wrap it for Shardus
-  const wrapped = dapp.createWrappedResponse(accountId, accountCreated, account.hash, account.timestamp, account)
-  return wrapped
-}
+  getRelevantData(accountId, tx) {
+    console.log('==> getRelevantData');
+    let account = accounts[accountId];
+    let accountCreated = false;
+
+    if (!account) {
+      account = {
+        id: accountId,
+        timestamp: tx.timestamp,
+        data: { balance: 0 }
+      };
+      accountCreated = true;
+    }
+    return dapp.createWrappedResponse(
+      accountId,
+      accountCreated,
+      crypto.hashObj(account),
+      account.timestamp,
+      account
+    );
+  },
 ```
 
 <Callout emoji="💡" type="default">
@@ -644,125 +607,81 @@ In more advanced applications, we will use multiple different account types. Sha
 
 </Callout>
 
-### getAccountData
+#### getAccountData
 
-The [getAccountData](../api/interface/setup/getAccountData.md) function is used by Shardus to fetch a range of account data from our application's database. It provides three arguments:
+The `getAccountData` function is used by shardus to fetch a range of account data from our application's database. It provides three arguments.
+- `accountIdStart` - The minimum account id from the range of accounts to fetch
+- `accountIdEnd` - The maximum account id from the range of accounts to fetch
+- `maxRecords` - The maximum number of accounts to fetch from database 
 
-1. `accountStart` - The minimum account id from the range of accounts to fetch
-2. `accountEnd` - The maximum account id from the range of accounts to fetch
-3. `maxRecords` - The maximum number of accounts to fetch from the database
+To implement this, loop through all the accounts in our database and add them to a list of results starting from accounts with id greater than `accountStart` up to accounts with id less than `accountEnd`. Wrap each account by using `createWrappedResponse` before adding it to the list of results.
 
-To implement this, loop through all the accounts in our database and add them to a list of results starting from accounts with id greater than `accountStart` up to accounts with id less than `accountEnd`. Wrap each account as shown below before adding it to the list of results:
+```js
+  getAccountData(accountIdStart, accountIdEnd, maxRecords) {
+    console.log('==> getAccountData');
+    const wrappedAccounts = [];
+    const start = parseInt(accountIdStart, 16);
+    const end = parseInt(accountIdEnd, 16);
 
-```javascript
-const wrapped = {
-  accountId: account.id,
-  stateId: account.hash,
-  data: account,
-  timestamp: account.timestamp,
-};
-```
+    for (const account of Object.values(accounts)) {
+      const parsedAccountId = parseInt(account.id, 16);
+      if (parsedAccountId < start || parsedAccountId > end) continue;
 
-<Callout emoji="💡" type="default">
+      const wacc = dapp.createWrappedResponse(
+        account.id,
+        false,
+        crypto.hashObj(account),
+        account.timestamp,
+        account
+      );
 
-We will be utilizing this `wrapped` structure in other functions as well
+      wrappedAccounts.push(wacc);
 
-</Callout>
-
-If we reach `maxRecords` return the results early. Here's an example of how `getAccountData` could be implemented
-
-```javascript
-getAccountData(accountStart, accountEnd, maxRecords) {
-  const results = []
-  const start = parseInt(accountStart, 16)
-  const end = parseInt(accountEnd, 16)
-  // Loop all accounts
-  for (const account of Object.values(accounts)) {
-    // Skip if not in account id range
-    const id = parseInt(account.id, 16)
-    if (id < start || id > end) continue
-
-    // Add to results
-    const wrapped = {
-      accountId: account.id,
-      stateId: account.hash,
-      data: account,
-      timestamp: account.timestamp
+      if (wrappedAccounts.length >= maxRecords) return wrappedAccounts;
     }
-    results.push(wrapped)
-
-    // Return results early if maxRecords reached
-    if (results.length >= maxRecords) return results
-  }
-  return results
-}
+    return wrappedAccounts;
+  },
 ```
 
-### updateAccountFull
+#### updateAccountFull
+The `updateAccountFull` function is used to update an account in our application's database. It provides three arguments.
 
-The [updateAccountFull](../api/interface/setup/updateAccountFull.md) function is used to update an account in our application's database. It provides three arguments:
-
-1. `wrappedData` - The wrapped data of the account to update
+1. `wrappedState` - The wrapped data of the account to update
 2. `localCache` - Your local application cache
 3. `applyResponse` - The response object generated from the `apply` function
 
-Grab the `accountId`, `accountCreated`, and `data` fields from `wrappedData` and put them into seperate variables. Create two more variables `hashBefore` and `hashAfter` of the account. `hashBefore` should be the current account hash, and `hashAfter` will be calculated using the crypto module. Then update the account hash using `hashAfter` and your database with the new account like so:
+Grab the `accountId`, `accountCreated`, and `data` fields from `wrappedState` and put them into seperate variables. Create two more variables `hashBefore` and `hashAfter` of the account. `hashBefore` should be the current account hash, and `hashAfter` will be calculated using the crypto module. Then update the account hash using `hashAfter` and your database with the new account like so:
 
-```javascript
-const hashAfter = crypto.hashObj(updatedAccount.data);
-updatedAccount.hash = hashAfter;
-// Save updatedAccount to db / persistent storage
-accounts[accountId] = updatedAccount;
+```js
+  updateAccountFull(wrappedState, localCache, applyResponse) {
+    console.log('==> updateAccountFull');
+    const {accountId, accountCreated} = wrappedState;
+    const updatedAccount = wrappedState.data as Account;
+
+    const hashBefore = accounts[accountId]
+      ? crypto.hashObj(accounts[accountId])
+      : '';
+
+    const hashAfter = crypto.hashObj(updatedAccount);
+
+    accounts[accountId] = updatedAccount;
+
+    dapp.applyResponseAddState(
+      applyResponse,
+      updatedAccount,
+      localCache,
+      accountId,
+      applyResponse.txId,
+      applyResponse.txTimestamp,
+      hashBefore,
+      hashAfter,
+      accountCreated
+    );
+  },
 ```
+#### updateAccountPartial
 
-Lastly, call the [applyResponseAddState](../api/interface/applyResponseAddState.md) function like this:
-
-```javascript
-dapp.applyResponseAddState(
-  applyResponse,
-  updatedAccount,
-  updatedAccount,
-  accountId,
-  applyResponse.txId,
-  applyResponse.txTimestamp,
-  hashBefore,
-  hashAfter,
-  accountCreated
-);
-```
-
-Here's a working implementation for the purposes of this application:
-
-```javascript
-updateAccountFull(wrappedData, localCache, applyResponse) {
-  const accountId = wrappedData.accountId
-  const accountCreated = wrappedData.accountCreated
-  const updatedAccount = wrappedData.data
-  // Update hash
-  const hashBefore = updatedAccount.hash
-  updatedAccount.hash = ''
-  const hashAfter = crypto.hashObj(updatedAccount)
-  updatedAccount.hash = hashAfter
-  // Save updatedAccount to db / persistent storage
-  accounts[accountId] = updatedAccount
-  // Add data to our required response object
-  dapp.applyResponseAddState(
-    applyResponse,
-    updatedAccount,
-    updatedAccount,
-    accountId,
-    applyResponse.txId,
-    applyResponse.txTimestamp,
-    hashBefore,
-    hashAfter,
-    accountCreated,
-  )
-}
-```
-
-### updateAccountPartial
-
-We dont really need to worry about [updateAccountPartial](../api/interface/setup/updateAccountPartial.md) for the sake of this application. Just use the following code which treats it the same as [updateAccountFull](../api/interface/setup/updateAccountFull.md):
+We dont really need to worry about [updateAccountPartial](../api/interface/setup/updateAccountPartial) for the sake of this application. Just use the following code which treats it the same as [updateAccountFull](../api/interface/setup/updateAccountFull):
 
 ```javascript
 updateAccountPartial (wrappedData, localCache, applyResponse) {
@@ -770,111 +689,96 @@ updateAccountPartial (wrappedData, localCache, applyResponse) {
 }
 ```
 
-### getAccountDataByList
 
-For implementing [getAccountDataByList](../api/interface/setup/getAccountDataByList.md), Once again, let's use our `wrapped` account object:
+#### getAccountDataByList
+For implementing `getAccountDataByList`, Once again we need to use `createWrappedResponse`.
+
+1. Loop throught the `addressList` passed in by shardus
+2. Grab the account from our database associated with that address.
+3. Wrap the account data using the `createWrappedResponse` function.
+4. Add to a list of results that we return for shardus
+
+```js
+
+  getAccountDataByList(addressList) {
+    console.log('==> getAccountDataByList');
+    const wrappedAccounts = [];
+
+    for (const address of addressList) {
+      const account = accounts[address];
+
+      if (!account) continue;
+
+      const wacc = dapp.createWrappedResponse(
+        account.id,
+        false,
+        crypto.hashObj(account),
+        account.timestamp,
+        account
+      );
+      wrappedAccounts.push(wacc);
+    }
+  },
+```
+#### getAccountDataByRange
+
+[getAccountDataByRange](../api/interface/setup/getAccountDataByRange) will look almost identical to [getAccountData](../api/interface/setup/getAccountData). The only difference in this function is that we add another range filter that looks for accounts with timestamp fields between the arguments `dateStart` and `dateEnd`. This is what it looks like:
+
 
 ```javascript
-const wrapped = {
-  accountId: account.id,
-  stateId: account.hash,
-  data: account,
-  timestamp: account.timestamp,
-};
-```
+  getAccountDataByRange(
+    accountStart,
+    accountEnd,
+    dateStart,
+    dateEnd,
+    maxRecords
+  ) {
+    console.log('==> getAccountDataByRange');
+    const wrappedAccounts = [];
 
-1. Loop through the `addressList` passed in by Shardus.
-2. Grab the `account` from our database associated with that `address`.
-3. Wrap the `account` data using the format above
-4. Add to a list of results that we return for Shardus
+    const start = parseInt(accountStart, 16);
+    const end = parseInt(accountEnd, 16);
 
-```javascript hightlight={6-10}
-getAccountDataByList(addressList) {
-  const results = []
-  for (const address of addressList) {
-    const account = accounts[address]
-    if (account) {
-      const wrapped = {
-        accountId: account.id,
-        stateId: account.hash,
-        data: account,
-        timestamp: account.timestamp
-      }
-      results.push(wrapped)
+    for (const account of Object.values(accounts)) {
+      // Skip if not in account id range
+      const id = parseInt(account.id, 16);
+      if (id < start || id > end) continue;
+
+      // Skip if not in timestamp range
+      const timestamp = account.timestamp;
+      if (timestamp < dateStart || timestamp > dateEnd) continue;
+
+      const wrappedAccount = dapp.createWrappedResponse(
+        account.id,
+        false,
+        crypto.hashObj(account),
+        account.timestamp,
+        account
+      );
+
+      wrappedAccounts.push(wrappedAccount);
+
+      // Return results early if maxRecords reached
+      if (wrappedAccounts.length >= maxRecords) return wrappedAccounts;
     }
-  }
-  results.sort((a, b) => parseInt(a.accountId, 16) - parseInt(b.accountId, 16))
-  return results
-}
+
+    return wrappedAccounts;
+  },
 ```
 
-### getAccountDataByRange
+#### calculateAccountHash
 
-[getAccountDataByRange](../api/interface/setup/getAccountDataByRange.md) will look almost identical to [getAccountData](../api/interface/setup/getAccountData.md). The only difference in this function is that we add another range filter that looks for accounts with timestamp fields between the arguments `tsStart` and `tsEnd`. This is what it looks like:
-
-<Callout emoji="🚨" type="error">
-
-> Pssssst....
-> Don't forget about wrapping the account
-
-```javascript
-const wrapped = {
-  accountId: account.id,
-  stateId: account.hash,
-  data: account,
-  timestamp: account.timestamp,
-};
-```
-
-</Callout>
-
-```javascript
-getAccountDataByRange(accountStart, accountEnd, tsStart, tsEnd, maxRecords) {
-  const results = []
-  const start = parseInt(accountStart, 16)
-  const end = parseInt(accountEnd, 16)
-  // Loop all accounts
-  for (const account of Object.values(accounts)) {
-    // Skip if not in account id range
-    const id = parseInt(account.id, 16)
-    if (id < start || id > end) continue
-    // Skip if not in timestamp range
-    const timestamp = account.timestamp
-    if (timestamp < tsStart || timestamp > tsEnd) continue
-    // Add to results
-    const wrapped = {
-      accountId: account.id,
-      stateId: account.hash,
-      data: account,
-      timestamp: account.timestamp
-    }
-    results.push(wrapped)
-    // Return results early if maxRecords reached
-    if (results.length >= maxRecords) {
-      results.sort((a, b) => a.timestamp - b.timestamp)
-      return results
-    }
-  }
-  results.sort((a, b) => a.timestamp - b.timestamp)
-  return results
-}
-```
-
-### calculateAccountHash
-
-As the name suggests, [calculateAccountHash](../api/interface/setup/calculateAccountHash.md) is responsible for returning a new hash from the `account` that is passed in as an argument. We can easily do this using our [crypto module](../tools/crypto-utils.md) we imported earlier. First, reset the account hash to an empty `string` so that we know the hash will only change if the data from some other field on the `account` changed. Use the following code for implementing this function:
+As the name suggests, [calculateAccountHash](../api/interface/setup/calculateAccountHash) is responsible for returning a new hash from the `account` that is passed in as an argument. We can easily do this using our [crypto module](../tools/crypto-utils) we imported earlier. First, reset the account hash to an empty `string` so that we know the hash will only change if the data from some other field on the `account` changed. Use the following code for implementing this function:
 
 ```javascript
 calculateAccountHash(account) {
-  account.hash = ''
-  account.hash = crypto.hashObj(account)
-  return account.hash
+  return crypto.hashObj(account)
 }
 ```
 
-### resetAccountData
+#### resetAccountData
 
-Shardus may need to restore previous account records to the node's database, and in order to do that we provide `shardus.setup` with a function called [resetAccountData](../api/interface/setup/resetAccountData.md).
+Shardus may need to restore previous account records to the node's database, and in order to do that we provide `shardus.setup` with a function called [resetAccountData](../api/interface/setup/resetAccountData).
 
 <Callout emoji="💡" type="default">
 
@@ -893,9 +797,9 @@ resetAccountData(accountBackupCopies) {
 }
 ```
 
-### close
+#### close
 
-[close](../api/interface/setup/close.md) tells Shardus what to do on server shutdown or stop. Treat this as a callback function that gets triggered when a node shuts down. For the sake of this application, use the following to implement `close`.
+[close](../api/interface/setup/close) tells Shardus what to do on server shutdown or stop. Treat this as a callback function that gets triggered when a node shuts down. For the sake of this application, use the following to implement `close`.
 
 ```javascript
 close () {
@@ -905,7 +809,7 @@ close () {
 
 ## Start the App
 
-Below the `setup` interface we just configured, call these two additional methods [registerExceptionHandler](../api/interface/registerExceptionHandler.md), and [start](../api/interface/start.md) in order to start the server:
+Below the `setup` interface we just configured, call these two additional methods [registerExceptionHandler](../api/interface/registerExceptionHandler), and [start](../api/interface/start) in order to start the server:
 
 ```javascript
 // Registers the handler for errors
@@ -921,8 +825,7 @@ That's just about it regarding how to setup a decentralized network using Shardu
 > _THESE_
 
 ```javascript
-validateTransaction (tx) {}
-validateTxnFields(tx) {}
+crack(tx) {}
 apply (tx, wrappedStates) {}
 getKeyFromTransaction (tx) {}
 getRelevantData (accountId, tx) {}
@@ -936,7 +839,7 @@ We are going to be creating a `CLI` in order to interact with our server because
 
 <Callout emoji="🚨" type="error">
 
-You _could_ use something like [Postman](https://www.postman.com/) and hit the inject endpoint with different transaction types for this example application if you wanted to since we aren't signing transactions yet. We will start signing transactions in our next [chat application](./chat-app-template.md) example.
+You _could_ use something like [Postman](https://www.postman.com/) and hit the inject endpoint with different transaction types for this example application if you wanted to since we aren't signing transactions yet. We will start signing transactions in our next [chat application](./chat-app-template) example.
 
 </Callout>
 
@@ -964,7 +867,7 @@ crypto.init('69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc');
 
 ### Creating our wallet file
 
-We need a way to create and save wallet info in a file so that we can interact with different accounts and send tokens back and forth. We'll use `wallet.json` as the place to store this data. We will try to require the `wallet.json` file right after initializing the [crypto](../tools/crypto-utils.md) module. If we run into any errors, or if `wallet.json` doesn't exist yet, let's create it. Use the code below to setup your `wallet.json` file:
+We need a way to create and save wallet info in a file so that we can interact with different accounts and send tokens back and forth. We'll use `wallet.json` as the place to store this data. We will try to require the `wallet.json` file right after initializing the [crypto](../tools/crypto-utils) module. If we run into any errors, or if `wallet.json` doesn't exist yet, let's create it. Use the code below to setup your `wallet.json` file:
 
 ```javascript
 const walletFile = resolve('./wallet.json');
@@ -1160,6 +1063,10 @@ vorpal.command('transfer', 'transfers tokens to another account').action(async f
     timestamp: Date.now(),
   };
   injectTx(tx).then((res) => {
+validateTransaction (tx) {}
+validateTxnFields(tx) {}
+validateTransaction (tx) {}
+validateTxnFields(tx) {}
     this.log(res);
     callback();
   });
