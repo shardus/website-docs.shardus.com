@@ -170,7 +170,7 @@ Add `start`, `stop`, `clean`, and `restart` scripts to the scripts field in your
 
 ## Setup Configuration
 
-In your app's root directory, create a `config.json` file where our shardus [configuration parameters](../api/configuration/README.md) will go:
+In your app's root directory, create a `config.json` file where our shardus [configuration parameters](../api/configuration/README) will go:
 
 ```sh
 touch config.json
@@ -223,7 +223,7 @@ const shardus = require('@shardus/core');
 const crypto = require('@shardus/crypto-utils');
 ```
 
-First, initialize the [crypto module](../tools/crypto-utils.md) we required by passing in `'69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc'` as an argument to its `init` constructor function. This is the hash key that shardus utilizes internally, and the one we'll be using for all the demo examples. This will initialize the cryptographic hashing functions you will be using soon.
+First, initialize the [crypto module](../tools/crypto-utils) we required by passing in `'69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc'` as an argument to its `init` constructor function. This is the hash key that shardus utilizes internally, and the one we'll be using for all the demo examples. This will initialize the cryptographic hashing functions you will be using soon.
 
 ```javascript
 crypto.init('69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc');
@@ -316,7 +316,7 @@ let accounts = {};
 
 ## Setup API
 
-Shardus provides a few methods for creating API routes. [registerExternalPost](../api/interface/registerExternalPost.md) and [registerExternalGet](../api/interface/registerExternalGet.md) will be used here to create an API we can fetch data from.
+Shardus provides a few methods for creating API routes. [registerExternalPost](../api/interface/registerExternalPost) and [registerExternalGet](../api/interface/registerExternalGet) will be used here to create an API we can fetch data from.
 
 <Callout emoji="⚠️" type="warning">
 
@@ -343,7 +343,7 @@ dapp.registerExternalPost('inject', async (req, res) => {
 
 <Callout emoji="💡" type="default">
 
-When we implement the client side of our application, we will submit transactions using a `POST` request to this `inject` route we created. Shardus uses the [put](../api/interface/put.md) method to inject the transaction data into the network.
+When we implement the client side of our application, we will submit transactions using a `POST` request to this `inject` route we created. Shardus uses the [put](../api/interface/put) method to inject the transaction data into the network.
 
 </Callout>
 
@@ -439,11 +439,11 @@ For this application, we will be demonstrating a todo list network where user ca
 
 #### apply
 
-[apply](../api/interface/setup/apply.md) is the function responsible for mutating your application state. This function is the only place where any change to the database (or the `accounts` object in this example) can occur. This is where we will use our `validateTransaction` helper function we created earlier. If the transaction that comes in passes our validation function, we can apply this transaction to the state of our application. Within `apply` we must return an `applyResponse` that we can get by calling `dapp.createApplyResponse(txId, tx.timestamp)`, passing in the transaction id (the hash of the transaction object passed into apply), and the timestamp field from the transaction object. Use the following code as an example of how to implement this function:
+[apply](../api/interface/setup/apply) is the function responsible for mutating your application state. This function is the only place where any change to the database (or the `accounts` object in this example) can occur. This is where we will use our `validateTransaction` helper function we created earlier. If the transaction that comes in passes our validation function, we can apply this transaction to the state of our application. Within `apply` we must return an `applyResponse` that we can get by calling `dapp.createApplyResponse(txId, tx.timestamp)`, passing in the transaction id (the hash of the transaction object passed into apply), and the timestamp field from the transaction object. Use the following code as an example of how to implement this function:
 
 <Callout emoji="💡" type="default">
 
-Here's a more in depth explanation of [createApplyResponse](../api/interface/createApplyResponse.md)
+Here's a more in depth explanation of [createApplyResponse](../api/interface/createApplyResponse)
 
 </Callout>
 
