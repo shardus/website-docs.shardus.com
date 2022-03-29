@@ -21,11 +21,11 @@ We need a set of tools with specific versions to successfully use `@shardus/core
 ### Configuring node version
 It is generally recommend to use `nvm` for node version management to anyone serious about nodejs development. Otherwise developers may need to install specific node version mannually. 
 
-`nvm` tool allow you have switch quickly between different node versions.
+`nvm` tool allow you to switch quickly between different node versions.
 
 To install `nvm` check [here](https://github.com/nvm-sh/nvm).
 
-After installing nvm on the machine, developers may then able to switch to specific `nvm` version by doing `nvm install 16.11.1` and `nvm use 16.11.1`.
+After installing nvm on the machine, developers may then be able to switch to specific `nvm` version by doing `nvm install 16.11.1` and `nvm use 16.11.1`.
 
 
 ### Configuring python3
