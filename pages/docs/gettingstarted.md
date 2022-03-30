@@ -1,18 +1,19 @@
 import Callout from 'nextra-theme-docs/callout'
 import Bleed from 'nextra-theme-docs/bleed'
 
-# Getting Start
-The goal of this section is to give you brief introduction to shardus by building a decentralized todo list app using shardus. We will start by setting up a tech stack on your machine.
+# Getting Started
+The goal of this section is to help you learn the fundamentals of Shardus by guiding you to build a decentralized todo list app with Shardus. We will start by setting up the tech stack on your machine.
 
-The repository for this guide can be seen [here](https://gitlab.com/shardus/applications/d-todo-list)
+The repository for this guide can be found
+ [here](https://gitlab.com/shardus/applications/d-todo-list)
 
-## Prerequsites
+## Prerequisites
 
 <Callout emoji="!" type="warning">
 Skip this entire step if you successfully followed [quickstart](./quickstart) section 
 </Callout>
 
-We need a set of tools with specific versions to successfully use `@shardus/core`. This tech stack include following.
+We need a set of tools with specific versions to successfully use @shardus/core. This tech stack includes the following:
 
 - Node version 16.11.1
 - Python3.9 (or latest)
@@ -23,13 +24,13 @@ It is generally recommend to use `nvm` for node version management to anyone ser
 
 `nvm` tool allow you to switch quickly between different node versions.
 
-To install `nvm` check [here](https://github.com/nvm-sh/nvm).
+Install `nvm` [here](https://github.com/nvm-sh/nvm).
 
-After installing nvm on the machine, developers may then be able to switch to specific `nvm` version by doing `nvm install 16.11.1` and `nvm use 16.11.1`.
+After installing nvm on your machine you are then able to switch to the specific nvm version by entering nvm install 16.11.1 and nvm use 16.11.1.
 
 
 ### Configuring python3
-Installing python on unix machine is fairly straight forward.
+Installing python on a unix machine is fairly straight forward.
 
 <Callout emoji="!" type="warning">
 Skip this entire step if you successfully followed [quickstart](./quickstart) section 
@@ -43,9 +44,9 @@ On Ubuntu:
 ```bash
 sudo apt-get install python3.9
 ```
-The exact command would differs from one linux system to another depending on what package management tools is being setup on the machine.
+The exact command differs from one linux system to another depending on what package management tools are being installed on the machine.
 
-For windows users this would include downloading python binaries for windows and installing it. Same goes for mac systems.
+For windows users this would include downloading python binaries for windows and installing it. This is also necessary for mac systems.
 
 ### Configuring rust
 
@@ -53,9 +54,9 @@ For windows users this would include downloading python binaries for windows and
 Skip this entire step if you successfully followed [quickstart](./quickstart) section 
 </Callout>
 
-When installation of shardus core, npm compile rust libraries on the fly. Though in future we would make this go away by shipping with binaries eliminating rust having to be installed on developers machines'.
+Npm compiles rust libraries on the fly when installing Shardus core. In the future, you would not need to compile rust by shipping with binaries which eliminate the need for rust to be installed on your machine.
 
-But until then, install rust by following instruction from [here](https://www.rust-lang.org/tools/install). Once you have `rustup` setup on your machine do -
+Until then, install rust by following the instructions here. Once rustup is setup on your machine enter: 
 
 ```bash
 rustup install stable

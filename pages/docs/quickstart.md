@@ -104,4 +104,4 @@ Clean databases and logs from the last run:
 shardus clean
 ```
 ## Congratulation
-Congratulations !!, you've successfully install, launch, stop, clean shardus network and interact with it. You can know proceed to next section to learn finer details of how to develop decentralized applications with shardus technology. To [Getting Started](./gettingstarted)
+Congratulations! You've successfully installed, launched, stopped, cleaned and interacted with a Shardus network. You can now proceed to the next section to learn the finer details of how to develop decentralized applications with Shardus
