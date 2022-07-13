@@ -3,9 +3,9 @@ import Bleed from 'nextra-theme-docs/bleed'
 
 # Quickstart
 
-This guide will help you install a basic dapp built on top of the shardus
-network. It'll walk you through installation, starting and stopping both
-single and multiple node networks, and interacting with the dapp.
+This guide will help you install a basic dApp built on top of the shardus
+network. It'll walk you through installing, starting, and stopping both
+single and multiple node networks, and interacting with the dApp.
 
 ## Installation
 
@@ -15,13 +15,13 @@ Start by cloning `Hello Shardus`:
 ```bash
 git clone https://gitlab.com/shardus/applications/hello-shardus.git
 ```
-Make sure you have the correct node version which is `16.11.1`
+Make sure that you have the correct node version which is `16.11.1`
 
 ```bash
 nvm install 16.11.1
 nvm use 16.11.1
 ```
-Now that correct node version is satisfied, go ahead and play with `hello-shardus`by doing
+Now that the correct node version is satisfied, go ahead and play with `hello-shardus` by doing
 ```bash
 cd hello-shardus
 npm install
@@ -29,7 +29,7 @@ npm install
 ```
 
 <Callout emoji="⚠️" type="error">
-If you encounters major problems doing `npm run start` or `npm i` checkout this [guide](./installation/setup)
+If you encounter major problems doing `npm run start` or `npm i`, checkout this [guide](./installation/setup)
 </Callout>
 
 ## Single node
@@ -67,12 +67,12 @@ npm run stop && npm run clean
 
 ## Network of nodes
 
-Create a local test network with multiple instances of your `index.js` server. In order to do that we need `shardus-cli` specifically design to do this.
-`shardus-cli` start a network containing multiple nodes by reading main `js` file specified inside `package.json` in current directory.
+Create a local test network with multiple instances of your `index.js` server. In order to do that, we need `shardus-cli`, which is specifically designed to do this.
+`shardus-cli` starts a network containing multiple nodes by reading main `js` file specified inside `package.json` in the current directory.
 
 ### Shardus cli
 <Callout emoji="💡" type="default">
-Make sure you have the Shardus CLI tool installed globally by doing
+Make sure that you have the Shardus CLI tool installed globally by doing
 
 ```bash
 npm install -g shardus
@@ -82,7 +82,7 @@ npm install -g shardus
 </Callout>
 
 ### Create a network with specified number of nodes
-To create a shardus network consist of 3 node
+To create a shardus network consisting of 3 nodes
 ```bash
 shardus create 3
 ```
@@ -94,7 +94,7 @@ npm run client
 ```
 
 ### Stopping and cleaning the network:
-Everytime you make a code change you need to restart network, in order for successful restart you need to first stop the previously running network and cleaning the residual files it generated.
+Everytime you make a code change, you need to restart the network. In order for a successful restart, you need to first stop the previously running network and clean the residual files it generated.
 ```bash
 shardus stop
 ```
@@ -103,5 +103,5 @@ Clean databases and logs from the last run:
 ```bash
 shardus clean
 ```
-## Congratulation
-Congratulations! You've successfully installed, launched, stopped, cleaned and interacted with a Shardus network. You can now proceed to the next section to learn the finer details of how to develop decentralized applications with Shardus
+## Congratulations
+Congratulations! You've successfully installed, launched, stopped, cleaned, and interacted with a Shardus network. You can now proceed to the next section to learn the finer details of how to develop decentralized applications with Shardus
