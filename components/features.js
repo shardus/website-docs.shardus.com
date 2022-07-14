@@ -7,7 +7,7 @@ const Feature = ({ text, icon }) => (
   </div>
 );
 
-// Transaltions for Features
+// Translations for Features
 const FEATURES_WITH_TRANSLATIONS = {
     fast: "INCREDIBLY FAST",
     scaleableProcessing: "SCALABLE PROCESSING",
