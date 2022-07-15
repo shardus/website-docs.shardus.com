@@ -36,7 +36,7 @@ nvm use 16.11.1
 ```
 
 ### Configuring python3
-Installing python on a Unix machine is fairly straight forward.
+Installing python on a Unix machine is fairly straightforward.
 
 <Callout emoji="❗" type="warning">
 Skip this entire step if you successfully followed [quickstart](./quickstart) section
@@ -60,9 +60,9 @@ For windows users, this would include downloading python binaries for windows an
 Skip this entire step if you successfully followed [quickstart](./quickstart) section
 </Callout>
 
-Npm compiles rust libraries on the fly when installing Shardus core. In the future, you would not need to compile rust by shipping with binaries which eliminate the need for rust to be installed on your machine.
+Currently, npm compiles the rust libraries on the fly when installing Shardus core. In the future, you would not need to install rust, as the binaries will be included instead.
 
-Until then, install rust by following the instructions here. Once rustup is setup on your machine, enter:
+Until then, install rust by following the instructions [here](https://www.rust-lang.org/tools/install). Once rustup is set up on your machine, enter:
 
 ```bash
 rustup install stable
