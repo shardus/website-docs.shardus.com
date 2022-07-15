@@ -477,12 +477,10 @@ Here's a more in depth explanation of [createApplyResponse](./api/interface/crea
         break;
       }
       case 'remove_todo': {
-        const oldList = wrappedAccounts[tx.accountId].data.todo;
-
-        // remove the lists
-        tx.todo.map(el => {
-          wrappedAccounts[tx.accountId].data.todo = oldList.filter(
-            todo => todo === el
+        // remove the todos
+        tx.todo.forEach(el => {
+          wrappedAccounts[tx.accountId].data.todo = wrappedAccounts[tx.accountId].data.todo.filter(
+            todo => todo !== el
           );
         });
         break;
