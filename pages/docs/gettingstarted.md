@@ -2,7 +2,7 @@ import Callout from 'nextra-theme-docs/callout'
 import Bleed from 'nextra-theme-docs/bleed'
 
 # Getting Started
-The goal of this section is to help you learn the fundamentals of Shardus by guiding you to build a decentralized todo list app with Shardus. We will start by setting up the tech stack on your machine.
+The goal of this section is to help you learn the fundamentals of Shardus by guiding you to build a decentralized to-do list app with Shardus. We will start by setting up the tech stack on your machine.
 
 The repository for this guide can be found
  [here](https://gitlab.com/shardus/applications/d-todo-list)
@@ -10,7 +10,7 @@ The repository for this guide can be found
 ## Prerequisites
 
 <Callout emoji="❗" type="warning">
-Skip this entire step if you successfully followed [quickstart](./quickstart) section 
+Skip this entire step if you successfully followed [quickstart](./quickstart) section
 </Callout>
 
 We need a set of tools with specific versions to successfully use @shardus/core. This tech stack includes the following:
@@ -20,13 +20,13 @@ We need a set of tools with specific versions to successfully use @shardus/core.
 - Rust
 
 ### Configuring node version
-It is generally recommend to use `nvm` for node version management to anyone serious about nodejs development. Otherwise, developers may need to install a specific node version mannually. 
+It is generally recommended to use `nvm` for node version management to anyone serious about nodejs development. Otherwise, developers may need to install a specific node version manually.
 
 The `nvm` tool allows you to quickly switch between different node versions.
 
 Install `nvm` [here](https://github.com/nvm-sh/nvm).
 
-After installing nvm on your machine, you are then able to switch to the specific nvm version by entering 
+After installing nvm on your machine, you are then able to switch to the specific nvm version by entering
 ```bash
 nvm install 16.11.1
 ```
@@ -39,7 +39,7 @@ nvm use 16.11.1
 Installing python on a Unix machine is fairly straight forward.
 
 <Callout emoji="❗" type="warning">
-Skip this entire step if you successfully followed [quickstart](./quickstart) section 
+Skip this entire step if you successfully followed [quickstart](./quickstart) section
 </Callout>
 
 For example, to install python3 on arch linux:
@@ -57,16 +57,16 @@ For windows users, this would include downloading python binaries for windows an
 ### Configuring rust
 
 <Callout emoji="❗" type="warning">
-Skip this entire step if you successfully followed [quickstart](./quickstart) section 
+Skip this entire step if you successfully followed [quickstart](./quickstart) section
 </Callout>
 
 Npm compiles rust libraries on the fly when installing Shardus core. In the future, you would not need to compile rust by shipping with binaries which eliminate the need for rust to be installed on your machine.
 
-Until then, install rust by following the instructions here. Once rustup is setup on your machine, enter: 
+Until then, install rust by following the instructions here. Once rustup is setup on your machine, enter:
 
 ```bash
 rustup install stable
-``` 
+```
 
 ```bash
 rustup default stable
@@ -74,7 +74,7 @@ rustup default stable
 For other systems see [this](https://forge.rust-lang.org/infra/other-installation-methods.html)
 
 ### Switch node version
-Make sure that you are using the correct node version by doing 
+Make sure that you are using the correct node version by doing
 ```
 nvm use 16.11.1
 ```
@@ -82,13 +82,13 @@ nvm use 16.11.1
 ## Let's start the project
 Now that you have satisfied the prerequsites for the shardus tech stack, you can start a nodejs project by doing the following.
 
-Create `package.json` by doing 
+Create `package.json` by doing
 ```
 npm init
 ```
 
 ### Install required global packages
-To install node-gyp, please do 
+To install node-gyp, please do
 ```bash
 npm i -g node-gyp
 ```
@@ -142,7 +142,7 @@ async function main () {
 }
 main()
 ```
-This script intializes pm2 to start `archiver` and `monitor-server`. 
+This script initializes pm2 to start `archiver` and `monitor-server`.
 Archiver servers store the full data of entire network while a node in a network only stores a fraction of it.
 Monitor servers basically monitor the nodes coming in, joining, syncing or failing!!!.
 
@@ -262,7 +262,7 @@ Your tsconfig file doesn't need to be an exact copy. If you know what you're doi
   ]
 }
 ```
-### Adding application layer on top of shardus 
+### Adding application layer on top of shardus
 Create a folder named `src` inside the root directory of our project and put `index.ts` inside it.
 
 #### Import modules
@@ -340,15 +340,15 @@ For the simplicity of this guide, we'll use a variable to act as our database to
 let accounts: Accounts = {}; // this is our database
 ```
 #### Creating rest api endpoints
-Shardus provides a few methods for creating API routes. 
-[registerExternalPost](./api/interface/registerExternalPost) 
+Shardus provides a few methods for creating API routes.
+[registerExternalPost](./api/interface/registerExternalPost)
 and [registerExternalGet](./api/interface/registerExternalGet) will be used here to create an API that we can fetch data from.
 
-We will have 3 rest api endpoints. 
+We will have 3 rest api endpoints.
 
 `/inject` post request endpoint to inject a transaction.
 
-`/list/:id` get request endpoint to retrieve the todo list of a user by providing its ID. ID here simply is a hash of the username.
+`/list/:id` get request endpoint to retrieve the to-do list of a user by providing its ID. ID here simply is a hash of the username.
 
 `/accounts` get request endpoint to retrieve the entire database (our in-memory object), so you could have some insights on structure of `accounts`.
 
@@ -398,10 +398,10 @@ dapp.setup({
   close() {},
 });
 ```
-We are now at most important part of this guide which is to implement these setup functions forming the application layer.
+We are now at the most important part of this guide which is to implement these setup functions forming the application layer.
 
 #### validate()
-Start by implementing the [validate](./api/interface/setup/validate) funcntion. The purpose of this function is to ensure certain requirements are met before allowing the transaction to get applied.
+Start by implementing the [validate](./api/interface/setup/validate) function. The purpose of this function is to ensure certain requirements are met before allowing the transaction to get applied.
 
 <Callout emoji="⚠️" type="warning">
 
@@ -409,7 +409,7 @@ It is the app developer's responsibility to ensure that the network is secure by
 
 </Callout>
 
-For this application, we will be demonstrating a todo list network where user can create a todo list tied to specific user. For the simplicity of this guide, each user will add and remove the list of another user.
+For this application, we will be demonstrating a to-do list network where users can create a to-do list tied to a specific user. For the simplicity of this guide, each user will add to and remove from the list of another user.
 ```ts
   validate(tx: Transaction) {
     console.log('==> validate');
@@ -454,12 +454,12 @@ For this application, we will be demonstrating a todo list network where user ca
 ```
 
 #### apply()
-[apply()](./api/interface/setup/apply)is the function responsible for mutating your application state. 
-This function is the only place where any change to the database (or the accounts object in this example) can occur. 
-This is where we will use our `validate()` helper function that we created earlier. 
-If the transaction that comes in passes our validation function, we can apply this transaction to the state of our application. 
-Within apply, we must return an applyResponse that we can get by calling `dapp.createApplyResponse(txId, tx.timestamp)`, 
-passing in the transaction id (the hash of the transaction object passed into apply), and the `timestamp` field from the transaction object. Use the following code as an example of how to implement this function:
+[apply()](./api/interface/setup/apply) is the function responsible for mutating your application state.
+This function is the only place where any change to the database (or the accounts object in this example) can occur.
+This is where we will use our `validate()` helper function that we created earlier.
+If the transaction that comes in passes our validation function, we can apply this transaction to the state of our application.
+Within apply, we must return an `applyResponse` that we can get by calling `dapp.createApplyResponse(txId, tx.timestamp)`,
+passing in the transaction ID (the hash of the transaction object passed into apply), and the `timestamp` field from the transaction object. Use the following code as an example of how to implement this function:
 
 <Callout emoji="💡" type="default">
 
@@ -493,17 +493,17 @@ Here's a more in depth explanation of [createApplyResponse](./api/interface/crea
 ```
 
 #### crack()
-The [crack()](./api/interface/setup/crack) function is responsible for parsing the public keys of the accounts being affected from this transaction 
-and returning a result object that resembles this: 
+The [crack()](./api/interface/setup/crack) function is responsible for parsing the public keys of the accounts being affected from this transaction
+and returning a result object that resembles this:
 ```ts
-{ 
-  sourceKeys: [tx.from], 
-  targetKeys: [tx.to], 
-  allKeys: [tx.from, tx.to], timestamp: tx.timestamp 
+{
+  sourceKeys: [tx.from],
+  targetKeys: [tx.to],
+  allKeys: [tx.from, tx.to], timestamp: tx.timestamp
 }
 ```
-The `sourceKeys` property should contain the public key of the account that initiated the transaction, 
-and the `targetKeys` property should contain the public key(s) of the account(s) being targeted. 
+The `sourceKeys` property should contain the public key of the account that initiated the transaction,
+and the `targetKeys` property should contain the public key(s) of the account(s) being targeted.
 `allKeys` should contain all the `sourceKeys` and `targetKeys`. Use the following code as an example of how to implement this function:
 
 ```ts
@@ -532,11 +532,11 @@ Use the following code to implement this function.
 ```
 
 #### resetAccountData()
-Shardus may need to restore previous account records to the node's database, and in order to do that, we provide `shadus.setup` with a function called
+Shardus may need to restore previous account records to the node's database, and in order to do that, we provide `shardus.setup` with a function called
 [resetAccountData()](./api/interface/setup/resetAccountData).
 
 <Callout emoji="!" type="warning">
-All we need to do here is to loop through the `accountBackupCopies` passed into the function. Grab the account from our database using the same backup copy id, and set the account we grabbed from the copy.
+All we need to do here is to loop through the `accountBackupCopies` passed into the function. Grab the account from our database using the same backup copy ID, and set the account we grabbed from the copy.
 </Callout>
 
 Here's a working example of how this can be done:
@@ -559,8 +559,7 @@ For [deleteAccountData()](./api/interface/setup/deleteAccountData), loop through
 ```
 
 #### deleteLocalAccountData()
-For [deleteLocalAccountData()](./api/interface/setup/deleteLocalAccountData), loop through the `addressList` passed in as an argument and delete the account in your database associated with each address.
-The function is used to wipe everything thing in node's database, thus local account data. 
+The [deleteLocalAccountData()](./api/interface/setup/deleteLocalAccountData) function is used to wipe everything thing in node's database, thus local account data.
 Use the following code to implement this function:
 ```ts
 deleteLocalAccountData () {
@@ -568,9 +567,9 @@ deleteLocalAccountData () {
 }
 ```
 #### getRelevantData()
-`getRelevantData` is where we can create accounts. Of course if the account already exists, all we have left to do is return a `wrappedResponse` that we can get by calling the `createWrappedResponse` function exposed by shardus.
+`getRelevantData` is where we can create accounts. Of course, if the account already exists, all we have left to do is return a `wrappedResponse` that we can get by calling the `createWrappedResponse` function exposed by shardus.
 
-The following demonstrates an implementation of getRelevantData that will work for this basic application:
+The following demonstrates an implementation of `getRelevantData` that will work for this basic application:
 ```ts
   getRelevantData(accountId, tx: Transaction) {
     console.log('==> getRelevantData');
@@ -596,7 +595,7 @@ The following demonstrates an implementation of getRelevantData that will work f
   },
 ```
 <Callout emoji="❗" type="warning">
-In more advanced applications, we will use multiple different account types. Shardus treats all data in the form of accounts, but these accounts can contain whatever data you want. Imagine a social networking application where you can write comments and posts. These types of data would exist on the network in the form of accounts, each with their own account id's, hashes, and timestamps. getRelevantData will be responsible for creating different accounts based on different transaction types.
+In more advanced applications, we will use multiple different account types. Shardus treats all data in the form of accounts, but these accounts can contain whatever data you want. Imagine a social networking application where you can write comments and posts. These types of data would exist on the network in the form of accounts, each with their own account IDs, hashes, and timestamps. getRelevantData will be responsible for creating different accounts based on different transaction types.
 </Callout>
 
 #### getAccountData()
@@ -604,9 +603,9 @@ In more advanced applications, we will use multiple different account types. Sha
 The `getAccountData` function is used by shardus to fetch a range of account data from our application's database. It provides three arguments.
 - `accountStart` - The minimum account ID from the range of accounts to fetch
 - `accountEnd` - The maximum account ID from the range of accounts to fetch
-- `maxRecords` - The maximum number of accounts to fetch from database 
+- `maxRecords` - The maximum number of accounts to fetch from database
 
-To implement this, loop through all the accounts in our database and add them to a list of results starting from accounts with an ID greater than `accountStart` up to accounts with ID less than `accountEnd`. Wrap each account by using `createWrappedResponse` before adding it to the list of results.
+To implement this, loop through all the accounts in our database and add them to a list of results starting from accounts with an ID greater than `accountStart` up to accounts with an ID less than `accountEnd`. Wrap each account by using `createWrappedResponse` before adding it to the list of results.
 ```ts
   getAccountData(accountIdStart, accountIdEnd, maxRecords) {
     console.log('==> getAccountData');
@@ -635,8 +634,8 @@ To implement this, loop through all the accounts in our database and add them to
 ```
 
 #### getAccountDataByRange
-`getAccountDataByRange` will look almost identical to `getAccountData`. 
-The only difference in this function is that we add another range filter that looks for accounts with timestamp fields between the arguments `tsStart` and `tsEnd`. 
+`getAccountDataByRange` will look almost identical to `getAccountData`.
+The only difference in this function is that we add another range filter that looks for accounts with `timestamp` fields between the arguments `tsStart` and `tsEnd`.
 This is what it looks like:
 
 ```ts
@@ -680,7 +679,7 @@ This is what it looks like:
   },
 ```
 #### getAccountDataByList()
-For implementing `getAccountDataByList`, nnce again we need to use `createWrappedResponse`.
+To implement `getAccountDataByList`, once again we need to use `createWrappedResponse`.
 
 1. Loop throught the `addressList` passed in by shardus
 2. Grab the account from our database associated with that address.
@@ -716,7 +715,7 @@ The `updateAccountFull` function is used to update an account in our application
 2. `localCache` - Your local application cache
 3. `applyResponse` - The response object generated from the `apply` function
 
-Grab the `accountId`, `accountCreated`, and `data` fields from `wrappedState` and put them into seperate variables. Create two more variables `hashBefore` and `hashAfter` of the account. `hashBefore` should be the current account hash, and `hashAfter` will be calculated using the crypto module. Then, update the account hash using `hashAfter` and your database with the new account like so:
+Grab the `accountId`, `accountCreated`, and `data` fields from `wrappedState` and put them into separate variables. Create two more variables `hashBefore` and `hashAfter` of the account. `hashBefore` should be the current account hash, and `hashAfter` will be calculated using the crypto module. Then, update the account hash using `hashAfter` and your database with the new account like so:
 
 ```ts
   updateAccountFull(wrappedState, localCache: Account, applyResponse) {
@@ -747,7 +746,7 @@ Grab the `accountId`, `accountCreated`, and `data` fields from `wrappedState` an
 ```
 
 #### updateAccountPartial()
-We dont really need to worry about [updateAccountPartial](./api/interface/setup/updateAccountPartial) for the sake of this application. Just use the following code which treats it the same as [updateAccountFull](./api/interface/setup/updateAccountFull):
+We don't really need to worry about [updateAccountPartial](./api/interface/setup/updateAccountPartial) for the sake of this application. Just use the following code which treats it the same as [updateAccountFull](./api/interface/setup/updateAccountFull):
 ```ts
 
   updateAccountPartial(wrappedState, localCache: Account, applyResponse) {
@@ -789,19 +788,19 @@ dapp.registerExceptionHandler();
 dapp.start();
 ```
 
-That's just about it regarding how to setup a decentralized network using Shardus. Play around by adding more transaction types to your application and remember the `setup` functions that will need modification when doing so.
+That's just about it regarding how to set up a decentralized network using Shardus. Play around by adding more transaction types to your application and remember the `setup` functions that will need modification when doing so.
 
 ### Creating the client
 We are going to be creating a `CLI` in order to interact with our server because it's _much_ faster than building a frontend.
 
 <Callout emoji="❗" type="warning">
 
-You _could_ use something like [Postman](https://www.postman.com/) and hit the inject endpoint with different transaction types for this example application if you wanted to since we aren't signing transactions yet. We will start signing transactions in one of our next examples ([chat application](./chat-app-template.md)).
+You _could_ use something like [Postman](https://www.postman.com/) and hit the inject endpoint with different transaction types for this example application, if you wanted to, since we aren't signing transactions yet. We will start signing transactions in one of our next examples ([chat application](./chat-app-template.md)).
 
 </Callout>
 
 #### Create client.ts
-Now that we have the shardus server setup, we'll interact with it by a cool little cli app. To do that, first create `client.ts` inside your `./src/`.
+Now that we have the shardus server set up, we'll interact with it through a cool little cli app. To do that, first create `client.ts` inside your `./src/`.
 
 #### Import modules
 After you created an empty typescript file `./src/clients.ts`, paste the following lines of code inside it.
@@ -818,12 +817,12 @@ Otherwise it will fail to understand each other.
 crypto.init('69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc');
 ```
 #### BASEURL
-Since our shardus would sit on port `9001` of our `localhost`, let's do: 
+Since our shardus would sit on port `9001` of our `localhost`, let's do:
 ```ts
 const BASEURL = 'http://localhost:9001';
 ```
 #### Transaction injector function
-This function is a wrapper around `got`, which is a HTTP request library allowing us to comfortably inject transactions.
+This function is a wrapper around `got`, which is an HTTP request library allowing us to comfortably inject transactions.
 
 ```ts
 async function inject(url, obj): Promise<string> {
@@ -836,7 +835,7 @@ async function inject(url, obj): Promise<string> {
 }
 ```
 #### Create todo add command
-This function allows us to add todo lists associated with a username:
+This function allows us to add to-dos to a list associated with a username:
 ```ts
 vorpal
   .command(
@@ -866,7 +865,7 @@ vorpal
 ```
 
 #### Create todo remove command
-This function allows us to remove todo list(s) from a list associated with a username:
+This function allows us to remove to-dos from a list associated with a username:
 ```ts
 vorpal
   .command(
@@ -894,7 +893,7 @@ vorpal
 ```
 
 #### Create todo view command
-This code allows us to view a todo list of a user in a reasonable format:
+This code allows us to view a to-do list of a user in a reasonable format:
 ```ts
 vorpal
   .command('todo view <username>', 'View a list of todo for a specific user')
@@ -909,8 +908,8 @@ vorpal
     cb();
   });
 ```
-#### Retrieve the database 
-This code allows us to see the entire `accounts` object acting as database in this project:
+#### Retrieve the database
+This code allows us to see the entire `accounts` object acting as the database in this project:
 ```ts
 vorpal.command('state', 'Query the database').action(async (args, cb) => {
   const API = BASEURL + '/accounts';
@@ -920,14 +919,14 @@ vorpal.command('state', 'Query the database').action(async (args, cb) => {
 });
 ```
 #### Create a prompt
-Every cli need a prompt, let's create one.
+Every cli needs a prompt, let's create one.
 ```ts
 vorpal.delimiter('~input:').show();
 ```
 See? As simple as that!! And this is all we need for our client.
 
 ## Starting the network
-We have the server and the client; let's put that into action. When starting a shardus network we have two options: 
+We have the server and the client; let's put that into action. When starting a shardus network we have two options:
 - using `npm run start`
 - using shardus cli
 
@@ -948,7 +947,7 @@ To stop the network:
 ```bash
 npm run stop
 ```
-To clean the residual files and folders left by `npm run start`. please do:
+To clean the residual files and folders left by `npm run start`, please do:
 ```bash
 npm run clean
 ```
@@ -959,20 +958,20 @@ npm run stop && npm run clean && npm run start
 
 ### Using shardus cli to start the network
 This method allows use to start a network consisting as many nodes as we want.
-Since the shardus cli reads `package.json` to find `index.js` to start the nodes and our codes is in typescript, let's compile our code
+Since the shardus cli reads `package.json` to find `index.js` to start the nodes and our code is in TypeScript, let's compile our code.
 
 To compile:
 ```bash
 npm run compile
 ```
-To start the network consisting 20 nodes:
+To start the network consisting of 20 nodes:
 ```bash
 shardus create-net 20
 ```
 
 To stop the network:
 ```bash
-shardus stop-net 
+shardus stop-net
 ```
 
 To clean residual folders and files, please do:
@@ -981,7 +980,7 @@ shardus clean-net
 ```
 
 ## Interact with the network
-To interact with the network let's start the client by doing `npm run client`. This will prompt you like this:
+To interact with the network, let's start the client by doing `npm run client`. This will prompt you like this:
 ```bash
 ~input:
 ```
@@ -998,23 +997,23 @@ Try typing `help`:
     todo view <username>           View a list of todo for a specific user
     state                          Query the database
 ```
-#### Adding todo list
+#### Adding to-dos to a list
 ```bash
 ~input: todo add "code and have dinner and sleep well" john
 ```
 #### Viewing the list
-To view the todo list of user john:
+To view the to-do list of user `john`:
 ```bash
 ~input: todo view john
 ```
-Output will be:
+The output will be:
 ```bash
 1.code
 2.have dinner
 3.sleep well
 ```
-#### Let's see what accounts database look like
-To see all accounts do:
+#### Let's see what the accounts database looks like
+To see all accounts:
 ```bash
 ~input: state
 ```
@@ -1030,4 +1029,4 @@ Output:
 }
 ```
 ## What's next
-We recommend for you to checkout this [guide](./exampes/coin-app-template).
+We recommend for you to check out this [guide](./examples/coin-app-template).

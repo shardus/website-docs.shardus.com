@@ -29,7 +29,7 @@ npm install
 ```
 
 <Callout emoji="⚠️" type="error">
-If you encounter major problems doing `npm run start` or `npm i`, checkout this [guide](./installation/setup)
+If you encounter major problems doing `npm run start` or `npm i`, check out this [guide](./installation/setup)
 </Callout>
 
 ## Single node
