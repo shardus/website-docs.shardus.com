@@ -61,7 +61,7 @@ After successful creation of node instances, Shardus CLI tool will automatically
 
 ## Stopping & Clean up
 
-When you are finished with your test, you should always stop the network and clean up the `instances` directory.
+When you are finished with your test, you should always stop the network and clean up the `instances` directory:
 
 ```bash
 shardus stop
