@@ -86,7 +86,7 @@ async function injectTx(tx) {
 
 ## Commands
 
-There are 2 commands that we can have vorpal execute at the start of the program before we start injecting transactions. `init` is a command that lets you start the CLI using the wallet of your choice, and `wallet create <name>` can create another named wallet, or return it's data if it already exists. It's also nice to have a command to switch hosts (shardus node you are sending requests to)
+There are 2 commands that we can have vorpal execute at the start of the program before we start injecting transactions. `init` is a command that lets you start the CLI using the wallet of your choice, and `wallet create <name>` can create another named wallet, or return it's data if it already exists. It's also nice to have a command to switch hosts (shardus node you are sending requests to).
 
 ```ts
 // Command to start the CLI with a named wallet
@@ -159,7 +159,7 @@ vorpal.command('verify', 'verifies your email address').action(async function(_,
 })
 ```
 
-First we wait for a prompt to be filled out by the user, then we create a transaction of the type `verify` and include our wallet address, the code from the prompt, and the current time using `Date.now()`. Now sign the transaction and use the `injectTx` helper function to submit the transaction to the network.
+First, we wait for a prompt to be filled out by the user, then we create a transaction of the type `verify` and include our wallet address, the code from the prompt, and the current time using `Date.now()`. Now, sign the transaction and use the `injectTx` helper function to submit the transaction to the network.
 
 ## Start
 

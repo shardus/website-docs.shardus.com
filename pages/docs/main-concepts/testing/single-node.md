@@ -32,14 +32,14 @@ yarn add -D cross-env execa pm2 shelljs yarpm
 
 ## Create scrips
 
-Create a `scripts` directory in the root of your project. Create 3 script files that will help start, stop, and clean a single node network.
+Create a `scripts` directory in the root of your project. Create 3 script files that will help start, stop, and clean a single node network:
 
 ```bash
 mkdir scripts && cd scripts
 touch start.js stop.js clean.js
 ```
 
-Copy this code into your `start.js` file
+Copy this code into your `start.js` file:
 
 ```javascript
 const execa = require('execa');
@@ -62,7 +62,7 @@ async function main() {
 main();
 ```
 
-Copy this code into your `stop.js` file
+Copy this code into your `stop.js` file:
 
 ```javascript
 const execa = require('execa');
@@ -78,7 +78,7 @@ async function main() {
 main();
 ```
 
-Copy this code into your `clean.js` file
+Copy this code into your `clean.js` file:
 
 ```javascript
 const { rm } = require('shelljs');
@@ -96,7 +96,7 @@ main();
 
 ## Add `scripts` to package.json
 
-Add `start stop clean restart` scripts to the scripts field of your `package.json` like so.
+Add `start stop clean restart` scripts to the scripts field of your `package.json` like so:
 
 ```json
 {
@@ -120,7 +120,7 @@ npm run start
 yarn start
 ```
 
-When you finish running your test, run the `stop` and `clean` scrips
+When you finish running your test, run the `stop` and `clean` scripts:
 
 ```bash
 npm run stop && npm run clean

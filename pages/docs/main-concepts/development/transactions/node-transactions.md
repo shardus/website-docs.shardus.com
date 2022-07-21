@@ -6,7 +6,7 @@ Liberdus is an application that required a few of these transactions, things lik
 
 ## Generating
 
-This `issue` transaction is responsible for automatically creating an account that holds a list of proposal account id's that users can submit. The purpose of this is so that you can easily query the network when you want to find all the proposals submitted to the nth network voting cycle. By creating accounts like this (hashing a numbered string values) you can easily find what the id of the current issue is (querying the global network variables) and then hashing the value using `crypto.hash("issue-"+ network.issue)`.
+This `issue` transaction is responsible for automatically creating an account that holds a list of proposal account id's that users can submit. The purpose of this is so that you can easily query the network when you want to find all the proposals submitted to the nth network voting cycle. By creating accounts like this (hashing a numbered string values) you can easily find what the id of the current issue is (by querying the global network variables) and then hashing the value using `crypto.hash("issue-"+ network.issue)`.
 
 ```ts
 async function generateIssue(address: string, nodeId: string): Promise<void> {
@@ -67,7 +67,7 @@ case 'issue': {
 
 ## Applying
 
-We modify 2 different accounts in this transaction, first the proposal, then the issue. The proposal will serve as the last parameters (no change) option which comes by default on every voting cycle. Deep clone the current network parameters, then give the account some default title and description. Next set the issue number to the current network issue number and set active to true. Add the default proposal id to the proposals array and increment the issue's `proposalCount`.
+We modify 2 different accounts in this transaction: first the proposal, then the issue. The proposal will serve as the last parameters (no change) option which comes by default on every voting cycle. Deep clone the current network parameters, then give the account some default title and description. Next, set the issue number to the current network issue number and set active to true. Add the default proposal id to the proposals array and increment the issue's `proposalCount`.
 
 ```ts
 case 'issue': {

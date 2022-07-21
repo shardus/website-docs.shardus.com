@@ -12,7 +12,7 @@ npm install shardus-crypto-utils
 yarn add shardus-crypto-utils
 ```
 
-Before using the `crypto` package for hashing, or signing data, we need to initialize the module using the `init` function and pass in a 64 character hex key.
+Before using the `crypto` package for hashing or signing data, we need to initialize the module using the `init` function and pass in a 64 character hex key.
 
 ```ts
 // Typescript
@@ -25,7 +25,7 @@ crypto.init('69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc');
 
 <Callout emoji="💡" type="default">
 
-  Learn more about how to use this package [here](../../tools/crypto-utils)
+  Learn more about how to use this package [here](../../tools/crypto-utils).
 
 </Callout>
 
@@ -43,10 +43,10 @@ The [tools](../../tools/README) section of the docs has more detailed documentat
 
 ## Shardus CLI Tool
 
-Lastly, you want to grab the [`shardus-cli-tool`](/docs/tools/shardus-cli-tool/README) which will provide you with various commands for helping you create, start, and stop networks.
+Lastly, you want to grab the [`shardus-cli-tool`](/docs/tools/shardus-cli-tool/README), which will provide you with various commands for helping you create, start, and stop networks.
 
 <Callout emoji="🚨" type="error">
 
-For the most part, you will be using the network tool provided in the shardus CLI tool, but there are a few other tools available as well. You can find more detailed documentation on the CLI tool [here](/docs/tools/shardus-cli-tool/README)
+For the most part, you will be using the network tool provided in the shardus CLI tool, but there are a few other tools available as well. You can find more detailed documentation on the CLI tool [here](/docs/tools/shardus-cli-tool/README).
 
 </Callout>
