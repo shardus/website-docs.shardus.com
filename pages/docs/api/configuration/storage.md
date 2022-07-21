@@ -26,7 +26,7 @@
 
 ```
 
-As of right now, it's best to leave the default storage configuration alone. This configuration is used by shardus for it's internal sqlite storage use cases.
+As of right now, it's best to leave the default storage configuration alone. This configuration is used by shardus for its internal sqlite storage use cases.
 
 > If you really want to, this file could be modified to use a seperate internal database, but it may require lots of changes on your end to make shardus work with it.
 

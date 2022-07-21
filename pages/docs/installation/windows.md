@@ -11,7 +11,7 @@ In order to install the Windows Subsystem for Linux, you need to be running Wind
 2. Make sure `Virtual Machine Platform` and `Windows Subsystem for Linux` boxes are enabled.
 3. Click ok and reboot your computer when prompted to do so.
 4. After reboot, go to the Windows store and search for `Ubuntu-20.04` or whatever version of linux you wish to use. (We recommend `Ubuntu-20.04`)
-5. Now open up `Powershell` as an admin user and run the command `wsl --set-version <distro> 2` in order to update wsl to the latest version which at the time of writing is version 2. `<distro>` refers to the linux distribution that you decided to use with `wsl`, in our example it was `Ubuntu-20.04`
+5. Now open up `Powershell` as an admin user and run the command `wsl --set-version <distro> 2` in order to update wsl to the latest version which, at the time of writing, is version 2. `<distro>` refers to the linux distribution that you decided to use with `wsl`; in our example it was `Ubuntu-20.04`
 6. Now open up the linux distribution and continue the [installation](setup) steps we have for linux.
 
 <Callout emoji="🚨" type="error">

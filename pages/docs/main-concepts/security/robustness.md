@@ -9,7 +9,7 @@ Making a transaction robust means that you add as many different security measur
 
 <Callout emoji="👇" type="default"> 
 
-Making the `apply_parameters` transaction robust
+Making the `apply_parameters` transaction robust.
 
 </Callout>
 

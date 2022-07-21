@@ -1,6 +1,6 @@
 # Testing
 
-There are two different ways to test run your shardus network.
+There are two different ways to test run your shardus network:
 
 * [Single Node](./single-node)
 * [Network of nodes](./network-of-nodes)

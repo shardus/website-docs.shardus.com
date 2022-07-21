@@ -2,7 +2,7 @@
 
 ## Spam a single node on Shardus
 
-1. Install project dependencies
+1. Install project dependencies:
 
 ```bash
 npm install
@@ -10,7 +10,7 @@ npm install
 yarn install
 ```
 
-2. Start the network with a single node
+2. Start the network with a single node:
 
 ```bash
 npm run start
@@ -18,7 +18,7 @@ npm run start
 yarn start
 ```
 
-3. Create a spam command in client.js to spam the node
+3. Create a spam command in client.js to spam the node:
 
 ```typescript
 vorpal
@@ -42,31 +42,31 @@ vorpal
   });
 ```
 
-4. Run the client
+4. Run the client:
 
 ```bash
 node client.js
 ```
 
-5. Use the wallet create command to initialize a named wallet
+5. Use the wallet create command to initialize a named wallet:
 
 ```bash
 wallet create myWallet
 ```
 
-6. Run the spam command to spam the single node
+6. Run the spam command to spam the single node:
 
 ```bash
 tokens spam create 100 myWallet 20 20
 ```
 
-7. Visit localhost:3000 in your browser to view the incoming network transactions
+7. Visit localhost:3000 in your browser to view the incoming network transactions.
 
 ## Spamming a network of Nodes
 
 Spamming a network of nodes on shardus gets a bit more complicated. It requires our spam client to aquire a list of node ip addresses and ports from the seed node server, and rapidly generate transactions.
 
-Start by creating a CLI command to spam the network with any given transaction type
+Start by creating a CLI command to spam the network with any given transaction type:
 
 ```ts
 vorpal
@@ -92,11 +92,11 @@ vorpal
 
 > This command will allow us to spam `count` transactions of whatever `type` of transaction we pass in, using `account` number of accounts, at a rate of `tps` transactions per second.
 
-Now lets implement the 4 functions we defined in the spam command to make it work
+Now lets implement the 4 functions we defined in the spam command to make it work.
 
 ## createAccounts
 
-This function needs to create an arbitrary number of accounts, each with their own keypairs in order to be able to sign the transactions. Define two more functions here, one for creating a single account, and one that uses the single `createAccount` function to create an arbitrary number of accounts, `createAccounts`. You will need to import the `crypto` module in order to generate keypairs.
+This function needs to create an arbitrary number of accounts, each with their own keypairs, in order to be able to sign the transactions. Define two more functions here, one for creating a single account, and one that uses the single `createAccount` function to create an arbitrary number of accounts: `createAccounts`. You will need to import the `crypto` module in order to generate keypairs.
 
 ```ts
 const crypto = require('shardus-crypto-utils');
@@ -182,7 +182,7 @@ function makeTxGenerator(accounts, total = 0, type) {
 }
 ```
 
-Now create the `buildTx` function that we passed into `buildGenerator`, inside of `makeTxGenerator`. Build the actual transaction according to the type, and what needs to be sent with that type of transaction, then sign the transaction with the account keys passed in ("from" and "to").
+Now, create the `buildTx` function that we passed into `buildGenerator` inside of `makeTxGenerator`. Build the actual transaction according to the type and what needs to be sent with that type of transaction, then sign the transaction with the account keys passed in ("from" and "to").
 
 ```ts
 function buildTx({ type, from, to, amount, message, toll }) {
@@ -246,7 +246,7 @@ function buildTx({ type, from, to, amount, message, toll }) {
 
 Create a function called `getSeedNodes` that grabs a list of node addresses from the seednode server. Make a `GET` request to the URL where your seedNode server is running at the route `/api/seednodes`.
 
-> Since i'm testing this on a network locally in my CLI spam command, I only need to map the port numbers returned from this function, however this will return an array of seedNode objects in this form:
+> Since i'm testing this on a network locally in my CLI spam command, I only need to map the port numbers returned from this function; however, this will return an array of seedNode objects in this form:
 > `[{"ip": "127.0.0.1", "port": 9001 }, {"ip": "127.0.0.1", "port": 9002 } ...]`
 > So you can use the data from this seed node server grab the ip addresses of the nodes as well.
 
@@ -260,7 +260,7 @@ async function getSeedNodes() {
 
 ## spamTxs
 
-Now implement the `spamTxs` function that actually spams the network with transactions. Additionally, you should implement write streams if you wish to log the sent transactions to a file for debugging purposes.
+Now, implement the `spamTxs` function that actually spams the network with transactions. Additionally, you should implement write streams if you wish to log the sent transactions to a file for debugging purposes.
 
 ```ts
 const fs = require('fs');
