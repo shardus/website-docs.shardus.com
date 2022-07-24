@@ -5,9 +5,9 @@ import Callout from 'nextra-theme-docs/callout'
 Making a transaction robust means that you add as many different security measures as possible. The goal is to make a transaction as robust as possible, without complicating the implementation. The "robust" transaction example shown below is part of the dynamic voting system in Liberdus. The transaction type we will demonstrate here is called `apply_parameters`. This transaction is responsible for changing the network parameters by applying the parameters held by the winning proposal from the recent voting results.
 
 
-> Since this transaction could drastically change the way the network is run, security and validation is at the utmost importance. We want to implement as many security measures we can take to protect against vulnerablities and hacks. The first step we can take is making sure this transaction is only valid during a particular time window. Liberdus works through a cycling system of 4 phases that start with proposals, then voting, then tallying, and finally applying. These time windows are represented within the global network parameters and can be used to validate transactions based on where their timestamp falls between the 4 phases. The second step to making this transaction more robust is to ensure the issue is still active (A boolean field that is flipped to false after finishing this network cycle).
+> Since this transaction could drastically change the way the network is run, security and validation is of utmost importance. We want to implement as many security measures we can take to protect against vulnerabilities and hacks. The first step we can take is making sure this transaction is only valid during a particular time window. Liberdus works through a cycling system of 4 phases that starts with (1) proposals, then (2) voting and (3) tallying, and finally (4) applying. These time windows are represented within the global network parameters and can be used to validate transactions based on where their timestamp falls between the 4 phases. The second step to making this transaction more robust is to ensure the issue is still active (using a boolean field that is flipped to false after finishing this network cycle).
 
-<Callout emoji="👇" type="default"> 
+<Callout emoji="👇" type="default">
 
 Making the `apply_parameters` transaction robust.
 

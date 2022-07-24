@@ -2,7 +2,7 @@ import Callout from 'nextra-theme-docs/callout'
 
 # Accounts
 
-Every state change within a shardus network affects account data in one form or another. There are no set restrictions on what constitutes account data, and it is up to the developer to decide what accounts can have data associated with things like a user or node account.
+Every state change within a Shardus network affects account data in one form or another. There are no set restrictions on what constitutes account data, and it is up to the developer to decide what accounts can have data associated with things like a user or node account.
 
 A `user account` is an account that represents a user's account data within the network.
 
@@ -56,7 +56,7 @@ A `node account` is an account that represents a node's account data within the 
 
 <Callout emoji="💡" type="default">
 
-Node accounts can have data associated with things like a node's balance and last mining reward timestamp.
+Node accounts can have data associated with things like a node's balance and the last mining reward timestamp.
 
 </Callout>
 
@@ -82,11 +82,11 @@ const account: NodeAccount = {
 
 Any account you create needs to have at least 3 properties.
 
-1. `id`
-2. `hash`
-3. `timestamp`
+- `id`
+- `hash`
+- `timestamp`
 
-Anything else will be up to the developer. Accounts can store any type of data they want. Changing the state of account data will require the account timestamp to be updated and the hash to be updated. Accounts should always have an id as well, so they can be queried easily. If we were to build a social networking application, each "post" would exist as a new account with at least these three properties.
+Anything else will be up to the developer. Accounts can store any type of data they want. Changing the state of account data will require the account timestamp to be updated and the hash to be updated. Accounts should always have an ID as well, so they can be queried easily. If we were to build a social networking application, each "post" would exist as a new account with at least these three properties.
 
 For example:
 

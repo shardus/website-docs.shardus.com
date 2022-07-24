@@ -7,10 +7,10 @@ This section describes the main concepts of building decentralized applications 
 ## Topics
 
 - [Development](./development/README)
+- [Considerations](./considerations/README)
 - [Security](./security/README)
 - [Testing](./testing/README)
 - [Debugging](./debugging/README)
 - [Deployment](./deployment/README)
-- [Considerations](./considerations/README)
 
 ---

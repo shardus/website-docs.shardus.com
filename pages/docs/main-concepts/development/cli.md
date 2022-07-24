@@ -2,11 +2,11 @@ import Callout from 'nextra-theme-docs/callout'
 
 # CLI
 
-Developing server side code requires a lot of testing. Each user transaction should be automated in such a way that enables you to test each transaction with ease. We use the npm library [vorpal](https://www.npmjs.com/package/vorpal) to create CLI commands that can be used in automated testing scripts.
+Developing server-side code requires a lot of testing. Each user transaction should be automated in such a way that enables you to test each transaction with ease. We use the `npm` library [vorpal](https://www.npmjs.com/package/vorpal) to create CLI commands that can be used in automated testing scripts.
 
 ## Initialization
 
-Below are some helpful packages we recommend using for creating a CLI. [fs](https://nodejs.org/api/fs.html), [path](https://nodejs.org/api/path.html), [vorpal](https://www.npmjs.com/package/vorpal), [shardus-crypto-utils](https://gitlab.com/shardus/shardus-crypto-utils), [axios](https://www.npmjs.com/package/axios).
+Below are some helpful packages we recommend using for creating a CLI: [fs](https://nodejs.org/api/fs.html), [path](https://nodejs.org/api/path.html), [vorpal](https://www.npmjs.com/package/vorpal), [shardus-crypto-utils](https://gitlab.com/shardus/shardus-crypto-utils), [axios](https://www.npmjs.com/package/axios).
 
 ```ts
 const fs = require('fs')
@@ -22,7 +22,7 @@ crypto.init('69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc')
 
 ## Setup
 
-Setting up the CLI requires loading wallet data, defining the host server and archive-server, implementing helper functions for creating accounts, getting seed nodes, and injecting transactions.
+Setting up the CLI requires loading wallet data; defining the host server and archive-server; and implementing helper functions for creating accounts, getting seed nodes, and injecting transactions.
 
 ```ts
 let USER
@@ -86,7 +86,7 @@ async function injectTx(tx) {
 
 ## Commands
 
-There are 2 commands that we can have vorpal execute at the start of the program before we start injecting transactions. `init` is a command that lets you start the CLI using the wallet of your choice, and `wallet create <name>` can create another named wallet, or return it's data if it already exists. It's also nice to have a command to switch hosts (shardus node you are sending requests to).
+There are 2 commands that we can have `vorpal` execute at the start of the program before we start injecting transactions. `init` is a command that lets you start the CLI using the wallet of your choice, and `wallet create <name>` can create another named wallet, or return its data if it already exists. It's also nice to have a command to switch hosts (the Shardus node you are sending requests to).
 
 ```ts
 // Command to start the CLI with a named wallet
@@ -159,11 +159,11 @@ vorpal.command('verify', 'verifies your email address').action(async function(_,
 })
 ```
 
-First, we wait for a prompt to be filled out by the user, then we create a transaction of the type `verify` and include our wallet address, the code from the prompt, and the current time using `Date.now()`. Now, sign the transaction and use the `injectTx` helper function to submit the transaction to the network.
+First, we wait for a prompt to be filled out by the user, then we create a transaction of the type `verify` and include our wallet address, the code from the prompt, and the current time using `Date.now()`. Finally, we sign the transaction and use the `injectTx` helper function to submit the transaction to the network.
 
 ## Start
 
-End the file by calling the following commands to setup the CLI delimiter, and our USER data with the `init` command.
+End the file by calling the following commands to set up the CLI delimiter, and our USER data with the `init` command.
 
 ```ts
 vorpal.delimiter('>').show()
