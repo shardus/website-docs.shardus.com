@@ -1,12 +1,12 @@
 # Network of Nodes
 
-Testing with a network of nodes is going to be the most beneficial way to stress your application. There are many different issues that you might come across when testing this way versus just a single node. Internal network communication between nodes could fail, there could be synchronization issues, node's could fail to join the network, and a host of other issues may present themselves. Since a real network is going to be sharded and have many nodes in the network, it is essential to test this way before deploying your application.
+Testing with a network of nodes is going to be the most beneficial way to stress your application. There are many different issues that you might come across when testing this way versus just a single node. Internal network communication between nodes could fail, there could be synchronization issues, nodes could fail to join the network, and a host of other issues may present themselves. Since a real network is going to be sharded and have many nodes in the network, it is essential to test this way before deploying your application.
 
 ## Install Dependencies
 
-The only dependency required for testing a network of nodes is the [shardus-cli-tool](../../tools/shardus-cli-tool). We are going to be using the [network](../../tools/shardus-cli-tool/network) module of the CLI tool in order to start, stop and clean the log files.
+The only dependency required for testing a network of nodes is the [shardus-cli-tool](../../tools/shardus-cli-tool/README). We are going to be using the [network](../../tools/shardus-cli-tool/network) module of the CLI tool in order to start, stop, and clean the log files.
 
-> Install the cli tool with the following command
+> Install the CLI tool with the following command:
 
 ```bash
 npm i -g shardus
@@ -16,7 +16,7 @@ yarn add global shardus
 
 ## Create a network
 
-In the root of your project, run
+In the root of your project, run:
 
 ```bash
 shardus create
@@ -57,9 +57,9 @@ Created server instance on folder <shardus-instance-9010>
 
 ## Run the network
 
-After successful creation of node instances, Shardus CLI tool will automatically start the network with provided configurations.
+After a successful creation of node instances, the Shardus CLI tool will automatically start the network with the provided configurations.
 
-## Stopping & Clean up
+## Stopping & Cleaning up
 
 When you are finished with your test, you should always stop the network and clean up the `instances` directory:
 

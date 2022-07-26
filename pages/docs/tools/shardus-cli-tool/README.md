@@ -15,7 +15,6 @@ npm i -g shardus
 yarn global add shardus
 ```
 
-
 <Callout emoji="💡" type="default">
 
 The `shardus` CLI also has autocomplete available to those of you who are using `zsh`.
@@ -32,15 +31,14 @@ echo "source <(shardus completion zsh)" >> ~/.zshrc \
 && source ~/.zshrc
 ```
 
+<Callout emoji="💡" type="default">
 
-<Callout emoji="💡" type="default"> 
-
-The sub modules included in the `shardus-cli`
+The submodules included in `shardus-cli`
 
 </Callout>
 
 - [shardus-network](./network)
-- [shardus-scan](./scan)
 - [shardus-debug](./debug)
+- [shardus-scan](./scan)
 - [shardus-deploy](./deploy)
 

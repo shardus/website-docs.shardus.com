@@ -1,6 +1,6 @@
 # Shardus Debugger Tool
 
-This tool allows you to manage debug data from a running shardus app network
+This tool allows you to manage debug data from a running Shardus app network.
 
 ## Usage
 
@@ -32,7 +32,7 @@ shardus debug combine ./test-net-debug
 
 ## Description
 
-The `shardus debug` tools are used to manage debug data from the running instances of a Shardus application network.
+The `shardus-debug` tools are used to manage debug data from the running instances of a Shardus application network.
 
 `shardus debug get` saves the debug data from a single instance into an `instanceDir`.
 

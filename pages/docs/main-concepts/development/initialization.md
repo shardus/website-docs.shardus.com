@@ -4,7 +4,7 @@ import Callout from 'nextra-theme-docs/callout'
 
 ## Cryptographic utilities
 
-Shardus requires a few key steps to get up and running. One of them is to install the [`shardus-crypto-utils`](../../tools/crypto-utils) npm package.
+Shardus requires a few key steps to get up and running. One of them is to install the [`shardus-crypto-utils`](../../tools/crypto-utils) `npm` package.
 
 ```bash
 npm install shardus-crypto-utils
@@ -12,7 +12,7 @@ npm install shardus-crypto-utils
 yarn add shardus-crypto-utils
 ```
 
-Before using the `crypto` package for hashing or signing data, we need to initialize the module using the `init` function and pass in a 64 character hex key.
+Before using the `crypto` package for hashing or signing data, we need to initialize the module using the `init` function and pass in a 64-character hex key.
 
 ```ts
 // Typescript
@@ -31,7 +31,7 @@ crypto.init('69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc');
 
 ## Monitor Client
 
-The next things you should setup for Shardus are the [`monitor-server`](../../tools/monitor-server) and [`monitor-client`](../../tools/monitor-client). These are used to visually monitor the status of the nodes in the network. The vast majority of the time something goes wrong because of a bug, you'll be able to tell just by looking at the monitor client. This is a screenshot of what the monitor client looks like with 10 active nodes in the network who are all in sync.
+The next things you should set up for Shardus are the [`monitor-server`](../../tools/monitor-server) and [`monitor-client`](../../tools/monitor-client). These are used to visually monitor the status of the nodes in the network. The vast majority of the time something goes wrong because of a bug, you'll be able to tell just by looking at the monitor client. This is a screenshot of what the monitor client looks like with 10 active nodes in the network that are all in sync.
 
 ![monitor-client](/img/monitor_client.png)
 
@@ -43,10 +43,10 @@ The [tools](../../tools/README) section of the docs has more detailed documentat
 
 ## Shardus CLI Tool
 
-Lastly, you want to grab the [`shardus-cli-tool`](/docs/tools/shardus-cli-tool/README), which will provide you with various commands for helping you create, start, and stop networks.
+Finally, you'll want to grab the [`shardus-cli-tool`](/docs/tools/shardus-cli-tool/README), which will provide you with various commands to help you create, start, and stop networks.
 
 <Callout emoji="🚨" type="error">
 
-For the most part, you will be using the network tool provided in the shardus CLI tool, but there are a few other tools available as well. You can find more detailed documentation on the CLI tool [here](/docs/tools/shardus-cli-tool/README).
+For the most part, you will be using the network tool provided in the Shardus CLI tool, but there are a few other tools available as well. You can find more detailed documentation on the CLI tool [here](/docs/tools/shardus-cli-tool/README).
 
 </Callout>

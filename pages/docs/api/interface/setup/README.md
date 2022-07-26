@@ -1,6 +1,6 @@
 # setup
 
-Shardus requires you to implement all the necessary SDK functions to be setup with your specific dapp. By using the `setup` function exposed by shardus, you can configure how you validate and mutate the state of your application. The following methods `(denoted by an asterisk)` are required to be passed into `shardus.setup`.
+Shardus requires you to implement all the necessary SDK functions to be set up with your specific dApp. By using the `setup` function exposed by Shardus, you can configure how you validate and mutate the state of your application. The following methods (required if denoted by an asterisk) can be passed into `shardus.setup`.
 
 ---
 

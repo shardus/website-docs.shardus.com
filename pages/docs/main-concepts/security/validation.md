@@ -3,14 +3,14 @@ import Bleed from 'nextra-theme-docs/bleed'
 
 # Validation
 
-Validation is used to validate fields in account data to ensure that they meet the requirements for a specific transaction to occur. The most basic example of validation is checking if an account has enough balance to transfer coins to another account. Doing this with shardus is as easy as running a simple `"if" "else"` check. It is recommended to use a helper function for validating each transaction type individualy. For example:
+Validation is used to validate fields in account data to ensure that they meet the requirements for a specific transaction to occur. The most basic example of validation is checking if an account has enough balance to transfer coins to another account. Doing this with Shardus is as easy as running a simple `if-else` check. It is recommended to use a helper function to validate each transaction type individually. For example:
 
 
-> In this example we will demonstrate how liberdus validates a `transfer` transaction. Below is a typescript interface defining the global network parameters the nodes use to validate transactions against. The only parameter we're concerned with is the `transactionFee`. This parameter is dynamic, meaning users can decide to change this during a voting cycle that occurs every few weeks. Due to the dynamic nature of this application, nodes need access to this data on every transaction to perform validation. This means that one of the transaction keys needs to hold the account data for these parameters, and it needs to be submitted with the transaction. We will use `tx.network` to refer to the address of that account.
+> In this example we will demonstrate how Liberdus validates a `transfer` transaction. Below is a TypeScript interface defining the global network parameters the nodes use to validate transactions against. The only parameter we're concerned with is the `transactionFee`. This parameter is dynamic, meaning users can decide to change this during a voting cycle that occurs every few weeks. Due to the dynamic nature of this application, nodes need access to this data on every transaction to perform validation. This means that one of the transaction keys needs to hold the account data for these parameters, and it needs to be submitted with the transaction. We will use `tx.network` to refer to the address of that account.
 
-<Callout emoji="👇" type="default"> 
+<Callout emoji="👇" type="default">
 
-Validating account balance for `transfer` transaction and using the network parameters from a global account for the transaction fee.
+Validating the account balance for the `transfer` transaction and using the network parameters from a global account for the transaction fee.
 
 </Callout>
 

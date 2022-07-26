@@ -8,8 +8,7 @@ Security is the most vital component of any decentralized application. The major
 
 <Callout emoji="🚨" type="error">
 
-Validating transactions is the process of taking account data from the keys of the transaction and ensuring they meet certain conditions for that transaction.
-[validation](./validation)
+[Transaction validation](./validation) is the process of taking account data from the keys of the transaction and ensuring they meet certain conditions for that transaction.
 
 </Callout>
 
@@ -17,7 +16,6 @@ Validating transactions is the process of taking account data from the keys of t
 
 <Callout emoji="💡" type="default">
 
-Robust transactions are highly critical transactions that need heavy validation measures to ensure security.
-[robustness](./robustness)
+[Robust transactions](./robustness) are highly critical transactions that need heavy validation measures to ensure security.
 
 </Callout>

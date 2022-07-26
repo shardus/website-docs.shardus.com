@@ -2,15 +2,15 @@ import Callout from 'nextra-theme-docs/callout'
 
 # Monitor Client
 
-The monitor client is useful for monitoring the state of a running shardus network at a glance. Each of the colored circles surrounding the perimeter of the large circle represent nodes. There are 3 colors for representing a node's status:
+The monitor client is useful for monitoring the state of a running Shardus network at a glance. Each of the colored circles surrounding the perimeter of the large circle represents a node. There are 3 colors for representing a node's status:
 
 ---
 
-`green` indicates that the node is active and validating transactions in the network.
+- `green` indicates that the node is active and validating transactions in the network.
 
-`yellow` indicates that a node is syncing with the network.
+- `yellow` indicates that a node is syncing with the network.
 
-`grey` indicates that a node has submitted a join request and is waiting for it's request to be accepted so it can start the syncing process.
+- `grey` indicates that a node has submitted a join request and is waiting for its request to be accepted, so it can start the syncing process.
 
 ---
 
@@ -21,9 +21,9 @@ The monitor client is useful for monitoring the state of a running shardus netwo
 
   `marker` indicates the cycle marker seen by that node
 
-  `state` indicates the hash value for the color of a node's state. This is green if everything looks OK and red otherwise.
+  `state` indicates the hash value for the color of a node's state (this is green if everything looks OK and red otherwise)
 
-  `nodeList` indicates the hash of the nodeList of this node
+  `nodeList` indicates the hash of the node list of this node
 
   `ExtIp` displays the node's IP address
 

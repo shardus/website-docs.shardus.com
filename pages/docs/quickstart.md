@@ -3,7 +3,7 @@ import Bleed from 'nextra-theme-docs/bleed'
 
 # Quickstart
 
-This guide will help you install a basic dApp built on top of the shardus
+This guide will help you install a basic dApp built on top of the Shardus
 network. It'll walk you through installing, starting, and stopping both
 single and multiple node networks, and interacting with the dApp.
 
@@ -70,7 +70,7 @@ npm run stop && npm run clean
 Create a local test network with multiple instances of your `index.js` server. In order to do that, we need `shardus-cli`, which is specifically designed to do this.
 `shardus-cli` starts a network containing multiple nodes by reading main `js` file specified inside `package.json` in the current directory.
 
-### Shardus cli
+### Shardus CLI
 <Callout emoji="💡" type="default">
 Make sure that you have the Shardus CLI tool installed globally by doing
 
@@ -82,7 +82,7 @@ npm install -g shardus
 </Callout>
 
 ### Create a network with specified number of nodes
-To create a shardus network consisting of 3 nodes
+To create a Shardus network consisting of 3 nodes
 ```bash
 shardus create 3
 ```
@@ -104,4 +104,4 @@ Clean databases and logs from the last run:
 shardus clean
 ```
 ## Congratulations
-Congratulations! You've successfully installed, launched, stopped, cleaned, and interacted with a Shardus network. You can now proceed to the next section to learn the finer details of how to develop decentralized applications with Shardus
+Congratulations! You've successfully installed, launched, stopped, cleaned, and interacted with a Shardus network. You can now proceed to the next section to learn the finer details of how to develop decentralized applications with Shardus.

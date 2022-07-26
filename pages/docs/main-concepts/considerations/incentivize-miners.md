@@ -2,18 +2,18 @@
 
 Building a reward system is a **crucial** step in developing decentralized applications. It provides the needed incentive for users to contribute resources to your application's network. Without a reward, not many people would bother to provide compute power for your application.
 
-Shardus makes it very easy for anyone to implement a reward system as they see fit. We don't constrict you in any way regarding how you want your token economics to work. That being said, here's a simple way we did it for a chat application.
+Shardus makes it easy for anyone to implement a reward system as they see fit. We don't constrict you in any way regarding how you want your token economics to work. That being said, here's a simple way we did it for a chat application.
 
 > Note: This isn't necessarily the best way of doing things, it's just a template to get you thinking how it could be done.
 
-1. In your `server` side application code, declare two variables for how often nodes should get paid, and how much.
+1. In your server-side application code, declare two variables for how often nodes should get paid, and how much.
 
 ```javascript
 const NODE_REWARD_TIME = 86400; // 24 Hours, in seconds format
 const NODE_REWARD_AMOUNT = 10; // 10 tokens rewarded for running a node for 24 hours
 ```
 
-2. Wrap `dapp.start()` in a immediately invoked async function expression. Then simply set an interval for a function `selfReward` to be called on every time interval corresponding to your `NODE_REWARD_TIME`.
+2. Wrap `dapp.start()` in an immediately-invoked `async` function expression. Then simply set an interval for a function `selfReward` to be called on every time interval corresponding to your `NODE_REWARD_TIME`.
 
 ```javascript
 (async () => {
@@ -24,7 +24,7 @@ const NODE_REWARD_AMOUNT = 10; // 10 tokens rewarded for running a node for 24 h
 })();
 ```
 
-3. Create the `selfReward` function somewhere in your `server` side code.
+3. Create the `selfReward` function somewhere in your server-side side code.
 
 ```javascript
 const { resolve } = require("path");
@@ -70,7 +70,7 @@ case "node_reward": {
   // If no account exists yet for this node address, pass it through to apply
   if (!accounts[tx.srcAcc]) {
     response.result = "pass";
-    response.reason = "This transaction in valid";
+    response.reason = "This transaction is valid";
     return response;
   }
 
@@ -78,10 +78,10 @@ case "node_reward": {
     // If an account exists, but hasn't been rewarded for mining yet, pass it through to apply
     if (!accounts[tx.srcAcc].nodeRewardTime) {
       response.result = "pass";
-      response.reason = "This transaction in valid";
+      response.reason = "This transaction is valid";
       return response;
     }
-    // If the account has been paid in the past, make sure it's been at least NODE_REWARD_TIME since it's last payment
+    // If the account has been paid in the past, make sure it's been at least NODE_REWARD_TIME since its last payment
     if (
       tx.timestamp - accounts[tx.srcAcc].nodeRewardTime <
       NODE_REWARD_TIME * 1000
@@ -112,18 +112,18 @@ case "node_reward": {
 }
 ```
 
-6. Lastly, add a case for `getKeyFromTransaction` in `dapp.setup`.
+6. Lastly, add a case for `crack` in `dapp.setup`.
 
 ```javascript
 case "node_reward":
-  result.sourceKeys = [tx.srcAcc]
+  result.sourceKeys = [tx.srcAcc];
   result.targetKeys = [tx.tgtAcc];
   break;
 ```
 
 > Play around with different settings and parameters to see what kind of coin economics work best for your decentralized application.
 
-7. Set the `NODE_REWARD_TIME` to something like 30 seconds and use the CLI client to query the accounts data. You should see balance getting added to every nodes' associated account. And thats it! That's all it takes to implement the incentive for users to run nodes on your network. Once again, play around and see what kind of crazy incentives for running nodes you can come up with.
+7. Set the `NODE_REWARD_TIME` to something like 30 seconds and use the CLI client to query the accounts' data. You should see balance getting added to every node's associated account. And that's it! That's all it takes to implement the incentive for users to run nodes on your network. Once again, play around and see what kind of crazy incentives for running nodes you can come up with.
 
 > Note: if you decide to set your `NODE_REWARD_TIME` to something along the lines of 60 seconds or less, you may want to run a timeout before the interval in order for your network of nodes to sync properly before bombarding the network with `node_reward` transactions. Like so...
 

@@ -1,10 +1,10 @@
 # Shardus Network
 
-This tool helps you to manage a local Shardus test network
+This tool helps you to manage a local Shardus test network.
 
 ## Usage
 
-The `shardus-network` tool uses `/instances` as the default `network_dir` if none other is provided.
+The `shardus-network` tool uses the `/instances` directory by default, if another isn't specified.
 
 ```sh
 shardus create-net [-n <amount-to-create>] [--no-start] [network_dir="/instances"]
@@ -28,7 +28,7 @@ Start the test network:
 shardus start-net 10
 ```
 
-Add 5 more nodes to the network and start them
+Add 5 more nodes to the network and start them:
 
 ```sh
 shardus create-net 5
@@ -46,7 +46,7 @@ Clean residual log and database files from the last run:
 shardus clean-net
 ```
 
-Set the `config.json` file for all the instances in the `/instances` folder
+Set the `config.json` file for all the instances in the `/instances` folder:
 
 ```sh
 shardus config-net
@@ -54,6 +54,6 @@ shardus config-net
 
 ## Description
 
-The `shardus network` tools are used to launch and scale local test networks that run your Shardus app code.
+The `shardus-network` tools are used to launch and scale local test networks that run your Shardus app code.
 
-`shardus create-net` provides a questionnaire that gathers information about the way your app is configured. This includes the location of the main executable and configuration files for your application. It then creates a directory for the test network and saves the information it gathered into a `network-config.json` file there. The `--default` option or the `-n` option can be passed to skip the questionnaire and use default values.
+`shardus create-net` provides a questionnaire that gathers information about the way your app is configured. This includes the location of the main executable and configuration files for your application. It then creates a directory for the test network and saves the information it gathered into a `network-config.json` file in that directory. The `--default` option or the `-n` option can be passed to skip the questionnaire and use default values.
