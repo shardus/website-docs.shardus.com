@@ -1,8 +1,8 @@
 # Single Node
 
-When building applications with shardus, it's useful to test using a single node just to get things working. Running a single node will let you test much faster because you don't have to wait for other nodes to sync up. Once you have your application [transactions](../development/transactions) implemented, you should start testing with a [network of nodes](./network-of-nodes).
+When building applications with Shardus, it's useful to test using a single node just to get things working. Running a single node will let you test much faster because you don't have to wait for other nodes to sync up. Once you have your application [transactions](../development/transactions/README) implemented, you should start testing with a [network of nodes](./network-of-nodes).
 
-> In order to test using a single node, you will need to create scripts that spin up the [archive-server](../../tools/archive-server) and [monitor-server](../../tools/monitor-server). There's a section in [Coin App](../../examples/coin-app-template) that also goes over setting up the scripts.
+> In order to test using a single node, you will need to create scripts that spin up the [archive-server](../../tools/archive-server) and [monitor-server](../../tools/monitor-server). There's also a section in the [Coin App](../../examples/coin-app-template) example that goes over setting up the scripts.
 
 ## Install Dependencies
 
@@ -30,7 +30,7 @@ yarn add -D @shardus/monitor-server
 yarn add -D cross-env execa pm2 shelljs yarpm
 ```
 
-## Create scrips
+## Create scripts
 
 Create a `scripts` directory in the root of your project. Create 3 script files that will help start, stop, and clean a single node network:
 
@@ -94,9 +94,9 @@ async function main() {
 main();
 ```
 
-## Add `scripts` to package.json
+## Add scripts to `package.json`
 
-Add `start stop clean restart` scripts to the scripts field of your `package.json` like so:
+Add `start`, `stop`, `clean`, and `restart` scripts to the `scripts` field of your `package.json` like so:
 
 ```json
 {
@@ -112,7 +112,7 @@ Add `start stop clean restart` scripts to the scripts field of your `package.jso
 
 ## Test
 
-Once you have the necessary scrips setup, you can start running your tests with the following command:
+Once you have the necessary scripts set up, you can start running your tests with the following command:
 
 ```bash
 npm run start

@@ -1,0 +1,9 @@
+{
+    "README": "Overview",
+    "initialization": "Initialization",
+    "accounts": "Accounts",
+    "transactions": "Transactions",
+    "api": "API",
+    "cli": "CLI",
+    "frontend": "Frontend"
+}

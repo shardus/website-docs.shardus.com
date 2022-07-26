@@ -2,11 +2,11 @@
 
 Anytime you need the network to automatically change state on its own, you need node transactions. These transactions can be triggered by the nodes running the network and are useful for things like tallying votes after a specified time frame.
 
-Liberdus is an application that required a few of these transactions, things like generating accounts to hold proposal submissions by users, counting the votes of each proposal, updating the network parameters, and submitting payments to developers.
+Liberdus is an application that required a few of these transactions, like generating accounts to hold proposal submissions by users, counting the votes of each proposal, updating the network parameters, and submitting payments to developers.
 
 ## Generating
 
-This `issue` transaction is responsible for automatically creating an account that holds a list of proposal account id's that users can submit. The purpose of this is so that you can easily query the network when you want to find all the proposals submitted to the nth network voting cycle. By creating accounts like this (hashing a numbered string values) you can easily find what the id of the current issue is (by querying the global network variables) and then hashing the value using `crypto.hash("issue-"+ network.issue)`.
+This `issue` transaction is responsible for automatically creating an account that holds a list of proposal account IDs that users can submit. As a result, you can easily query the network when you want to find all the proposals submitted to the nth network voting cycle. By creating such accounts (hashing numbered string values), you can easily find the ID of the current issue (by querying the global network variables) and then hash the value using `crypto.hash("issue-" + network.issue)`.
 
 ```ts
 async function generateIssue(address: string, nodeId: string): Promise<void> {
@@ -28,7 +28,7 @@ async function generateIssue(address: string, nodeId: string): Promise<void> {
 
 ## Keys
 
-The keys of any transaction are going to resemble the public keys of the accounts associated with the transaction. We are required to specify these in [getKeyFromTransaction](../../../api/interface/setup/getKeyFromTransaction). This particular transaction requires 4 keys.
+The keys of any transaction are going to resemble the public keys of the accounts associated with the transaction. We are required to specify these in [crack()](../../../api/interface/setup/crack). This particular transaction requires 4 keys.
 
 ```ts
 case 'issue':
@@ -39,7 +39,7 @@ case 'issue':
 
 ## Validation
 
-Validation of the `issue` transaction requires making sure the issue id matches the hash of the current network issue, making sure the issue account hasn't already been created, and that the proposal id matches what the hash of the current network issue's default proposal is.
+Validation of the `issue` transaction requires making sure the issue ID matches the hash of the current network issue, making sure the issue account hasn't already been created, and that the proposal ID matches the hash of the current network issue's default proposal.
 
 ```ts
 case 'issue': {
@@ -67,7 +67,7 @@ case 'issue': {
 
 ## Applying
 
-We modify 2 different accounts in this transaction: first the proposal, then the issue. The proposal will serve as the last parameters (no change) option which comes by default on every voting cycle. Deep clone the current network parameters, then give the account some default title and description. Next, set the issue number to the current network issue number and set active to true. Add the default proposal id to the proposals array and increment the issue's `proposalCount`.
+We modify 2 different accounts in this transaction: first the proposal, then the issue. The proposal will serve as the last parameters (no change) option which comes by default on every voting cycle. Deep clone the current network parameters, then give the account some default title and description. Next, set the issue number to the current network issue number and set `active` to `true`. Add the default proposal ID to the proposals array and increment the issue's `proposalCount`.
 
 ```ts
 case 'issue': {

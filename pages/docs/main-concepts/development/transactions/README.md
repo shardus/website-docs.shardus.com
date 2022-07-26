@@ -4,11 +4,10 @@ import Callout from 'nextra-theme-docs/callout'
 
 Transactions within Shardus resemble a request to change the state of the network in one way or another. There are 2 types of transactions:
 
-1. User Transactions: transactions initiated by user accounts within the network
-2. Node Transactions: transactions initiated by nodes within the network
+- User Transactions: transactions initiated by user accounts within the network
+- Node Transactions: transactions initiated by nodes within the network
 
 ## User Transaction Example
-
 
 <Callout emoji="💡" type="default">
 
@@ -18,7 +17,7 @@ The most basic transaction a user would initiate is a `transfer` transaction, or
 
 ```ts
 const tx = {
-    type: 'transfer', // the type of transaction being submited
+    type: 'transfer', // the type of transaction being submitted
     from: USER.address, // publicKey or address of the user submitting the transaction
     to: '0'.repeat(64), // publicKey or address of the target account receiving the transaction
     amount: answers.amount, // amount of coins to send to the target
@@ -36,7 +35,7 @@ The most basic transaction a node would initiate is a `node_reward` transaction 
 
 ```ts
 const tx = {
-    type: 'node_reward', // the type of transaction being submited
+    type: 'node_reward', // the type of transaction being submitted
     nodeId: nodeId, // nodeId of the node submitting the transaction
     from: address, // publicKey of the node submitting the transaction
     to: payAddress, // address of the account receiving the payment reward

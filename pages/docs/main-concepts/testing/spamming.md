@@ -18,7 +18,7 @@ npm run start
 yarn start
 ```
 
-3. Create a spam command in client.js to spam the node:
+3. Create a `spam` command in `client.js` to spam the node:
 
 ```typescript
 vorpal
@@ -60,11 +60,11 @@ wallet create myWallet
 tokens spam create 100 myWallet 20 20
 ```
 
-7. Visit localhost:3000 in your browser to view the incoming network transactions.
+7. Visit _localhost:3000_ in your browser to view the incoming network transactions.
 
-## Spamming a network of Nodes
+## Spamming a network of nodes
 
-Spamming a network of nodes on shardus gets a bit more complicated. It requires our spam client to aquire a list of node ip addresses and ports from the seed node server, and rapidly generate transactions.
+Spamming a network of nodes on Shardus gets a bit more complicated. It requires our spam client to acquire a list of node IP addresses and ports from the seed node server, and rapidly generate transactions.
 
 Start by creating a CLI command to spam the network with any given transaction type:
 
@@ -92,11 +92,11 @@ vorpal
 
 > This command will allow us to spam `count` transactions of whatever `type` of transaction we pass in, using `account` number of accounts, at a rate of `tps` transactions per second.
 
-Now lets implement the 4 functions we defined in the spam command to make it work.
+Now let's implement the 4 functions we defined in the `spam` command to make it work.
 
 ## createAccounts
 
-This function needs to create an arbitrary number of accounts, each with their own keypairs, in order to be able to sign the transactions. Define two more functions here, one for creating a single account, and one that uses the single `createAccount` function to create an arbitrary number of accounts: `createAccounts`. You will need to import the `crypto` module in order to generate keypairs.
+This function needs to create an arbitrary number of accounts, each with their own key pairs, in order to be able to sign the transactions. Define two more functions here, one for creating a single account, and one that uses the single `createAccount` function to create an arbitrary number of accounts: `createAccounts`. You will need to import the `crypto` module in order to generate key pairs.
 
 ```ts
 const crypto = require('shardus-crypto-utils');
@@ -118,7 +118,7 @@ function createAccounts(num) {
 
 ## makeTxGenerator
 
-Create a function called `makeTxGenerator` that implements a generator function called `buildGenerator`. `buildGenerator` should loop through all the accounts passed in, generate "create" transactions so they have tokens to transfer, and then generate whatever transaction "type" was passed in. Use a while loop to iterate through each account until the number of transactions generated is equivalent to the `total` value passed in by the CLI command.
+Create a function called `makeTxGenerator` that implements a generator function called `buildGenerator`. `buildGenerator` should loop through all the accounts passed in, generate `create` transactions so they have tokens to transfer, and then generate whatever transaction `type` was passed in. Use a `while` loop to iterate through each account until the number of transactions generated is equivalent to the `total` value passed in by the CLI command.
 
 ```ts
 function makeTxGenerator(accounts, total = 0, type) {
@@ -182,7 +182,7 @@ function makeTxGenerator(accounts, total = 0, type) {
 }
 ```
 
-Now, create the `buildTx` function that we passed into `buildGenerator` inside of `makeTxGenerator`. Build the actual transaction according to the type and what needs to be sent with that type of transaction, then sign the transaction with the account keys passed in ("from" and "to").
+Now, create the `buildTx` function that we passed into `buildGenerator` inside of `makeTxGenerator`. Build the actual transaction according to the type and what needs to be sent with that type of transaction, then sign the transaction with the account keys passed in (`from` and `to`).
 
 ```ts
 function buildTx({ type, from, to, amount, message, toll }) {
@@ -244,11 +244,11 @@ function buildTx({ type, from, to, amount, message, toll }) {
 
 ## getSeedNodes
 
-Create a function called `getSeedNodes` that grabs a list of node addresses from the seednode server. Make a `GET` request to the URL where your seedNode server is running at the route `/api/seednodes`.
+Create a function called `getSeedNodes` that grabs a list of node addresses from the seed node server. Make a `GET` request to the URL where your seed node server is running at the route `/api/seednodes`.
 
-> Since i'm testing this on a network locally in my CLI spam command, I only need to map the port numbers returned from this function; however, this will return an array of seedNode objects in this form:
+> Since I'm testing this on a network locally in my CLI spam command, I only need to map the port numbers returned from this function; however, this will return an array of seed node objects in this form:
 > `[{"ip": "127.0.0.1", "port": 9001 }, {"ip": "127.0.0.1", "port": 9002 } ...]`
-> So you can use the data from this seed node server grab the ip addresses of the nodes as well.
+> So you can use the data from this seed node server to grab the IP addresses of the nodes as well.
 
 ```ts
 async function getSeedNodes() {
