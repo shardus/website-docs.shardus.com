@@ -72,7 +72,7 @@
 
 ## dir
 
-The `dir` parameter is a `String` used to define the base directory where the logs files will be generated and stored
+The `dir` parameter is a `String` used to define the base directory where the log files will be generated and stored.
 
 ```json
 {
@@ -82,7 +82,7 @@ The `dir` parameter is a `String` used to define the base directory where the lo
 
 ## files
 
-The `files` parameter is an `Object` used to define the file names for the various log types
+The `files` parameter is an `Object` used to define the file names for the various log types:
 
 ```json
 {
@@ -90,15 +90,15 @@ The `files` parameter is an `Object` used to define the file names for the vario
 }
 ```
 
-> The `main` parameter is a `String` that defines the file name for the main logs
+> The `main` parameter is a `String` that defines the file name for the main logs.
 
-> The `fatal` parameter is a `String` that defines the file name for the fatal logs
+> The `fatal` parameter is a `String` that defines the file name for the fatal logs.
 
-> The `net` parameter is a `String` that defines the file name for the net logs
+> The `net` parameter is a `String` that defines the file name for the net logs.
 
 ## options
 
-The `options` parameter is an `Object` used to define a subset of option parameters
+The `options` parameter is an `Object` used to define a subset of option parameters:
 
 ```json
 "options": {
@@ -109,7 +109,7 @@ The `options` parameter is an `Object` used to define a subset of option paramet
 
 ## appenders
 
-The `appenders` parameter is an `Object` used to define output settings for the different types of log files.
+The `appenders` parameter is an `Object` used to define output settings for the different types of log files:
 
 ```json
 "appenders": {
@@ -147,21 +147,32 @@ The `appenders` parameter is an `Object` used to define output settings for the 
 }
 ```
 
-There are 7 configurations objects for `appenders` that each have their own sub configuration parameters.
+There are 7 configurations objects for `appenders` that each have their own subparameters.
 
 1. `out` is an `Object` that configures console output
 2. `main` is an `Object` that configures output for main applications logs
 3. `fatal` is an `Object` that configures output for fatal application logs
 
 ```json
-[2019-10-08T13:36:08.664] [FATAL] fatal - tryApplyTransaction failed: Error: invalid transaction, reason: Source account does not have sufficient funds.. tx: {"amount":50,"message":"{\"body\":\"hello\",\"handle\":\"jeff\",\"timestamp\":1570559762588}","srcAcc":"9407cff230d002bc9956594c0cfb18587d4db374705273d0dc07b48d92f14879","tgtAcc":"4fd17af679355102e9262c74152545c4f15bcf90f881475644b9ab1b437eb97c","timestamp":1570559762592,"type":"message","sign":{"owner":"9407cff230d002bc9956594c0cfb18587d4db374705273d0dc07b48d92f14879","sig":"8e824f755571e78aefceae420e74b31bd9b84168db000cd1ec28783aa91f73fb7e4b82d6e0ade192dac7a7c788880930e03aaa30de0c2c644f17e7857686ab08f4cb9ca5269f8da52b3421996032249ced77b95fb5d6acaa66e2831b51eb5517"}} at Error: invalid transaction, reason: Source account does not have sufficient funds.. tx: {"amount":50,"message":"{\"body\":\"hello\",\"handle\":\"jeff\",\"timestamp\":1570559762588}","srcAcc":"9407cff230d002bc9956594c0cfb18587d4db374705273d0dc07b48d92f14879","tgtAcc":"4fd17af679355102e9262c74152545c4f15bcf90f881475644b9ab1b437eb97c","timestamp":1570559762592,"type":"message","sign":{"owner":"9407cff230d002bc9956594c0cfb18587d4db374705273d0dc07b48d92f14879","sig":"8e824f755571e78aefceae420e74b31bd9b84168db000cd1ec28783aa91f73fb7e4b82d6e0ade192dac7a7c788880930e03aaa30de0c2c644f17e7857686ab08f4cb9ca5269f8da52b3421996032249ced77b95fb5d6acaa66e2831b51eb5517"}}
+(formatting added)
+[2019-10-08T13:36:08.664] [FATAL] fatal - tryApplyTransaction failed: Error: invalid transaction, reason: Source account does not have sufficient funds..
+ tx: {"amount":50,
+      "message":"{\"body\":\"hello\",\"handle\":\"jeff\",\"timestamp\":1570559762588}",
+      "srcAcc":"9407cff230d002bc9956594c0cfb18587d4db374705273d0dc07b48d92f14879",
+      "tgtAcc":"4fd17af679355102e9262c74152545c4f15bcf90f881475644b9ab1b437eb97c",
+      "timestamp":1570559762592,
+      "type":"message",
+      "sign":{"owner":"9407cff230d002bc9956594c0cfb18587d4db374705273d0dc07b48d92f14879",
+              "sig":"8e824f755571e78aefceae420e74b31bd9b84168db000cd1ec28783aa91f73fb7e4b82d6e0ade192dac7a7c788880930e03aaa30de0c2c644f17e7857686ab08f4cb9ca5269f8da52b3421996032249ced77b95fb5d6acaa66e2831b51eb5517"
+             }
+     }
     at Object.apply (/Users/kyle/Desktop/dappChat/index.js:621:13)
     at Object.applicationInterfaceImpl.apply (/Users/kyle/shardus-global-server/src/shardus/index.js:458:85)
     at StateManager.tryApplyTransaction (/Users/kyle/shardus-global-server/src/state-manager/index.js:3317:38)
 ```
 
 4. `errorFile` is an `Object` that configures output for error logs
-5. `errors` is an `Object` that configures filtering for application ERROR throwing
+5. `errors` is an `Object` that configures filtering for application _error_ throwing
 6. `net` is an `Object` that configures output for network logs
 
 ```json
@@ -190,8 +201,8 @@ There are 7 configurations objects for `appenders` that each have their own sub 
 
 Each "file" type appender can set 2 additional parameters:
 
-1. `"maxLogSize"` is an `Integer` that declares the maximum size of a log file (in bytes)
-2. `"backups"` is an `Integer` that declares the maximum number of log files
+- `maxLogSize` is an `Integer` that declares the maximum size of a log file (in bytes)
+- `backups` is an `Integer` that declares the maximum number of log files
 
 ## categories
 
@@ -209,4 +220,4 @@ The `categories` parameter is an `Object` used to define the logging categories,
 }
 ```
 
-> Setting the level of all the log categories to `"fatal"` will drastically reduce the amount of logs generated and give your application a slight boost in speed.
+> Setting the level of all the log categories to `fatal` will drastically reduce the amount of logs generated and give your application a slight boost in speed.

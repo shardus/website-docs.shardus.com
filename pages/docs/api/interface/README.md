@@ -2,7 +2,7 @@ import Callout from 'nextra-theme-docs/callout'
 
 # Interface
 
-The Shardus API provides you with a few essential methods required to configure a shardus network. You can see the required methods here:
+The Shardus API provides you with a few essential methods required to configure a Shardus network. You can see the required methods here:
 
 ---
 
