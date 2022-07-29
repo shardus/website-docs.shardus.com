@@ -1,9 +1,9 @@
 # createApplyResponse
 
-`createApplyResponse` is a function that needs to be called before applying any transaction. It is meant to be called within the [apply](./setup/apply) function of [setup](./setup). The function takes 2 parameters:
+`createApplyResponse` is a function that needs to be called before applying any transaction. It is meant to be called within the [apply](./setup/apply) function of [setup](./setup/README). The function takes 2 parameters:
 
-1. `txId` is a `string` representing the hash of the transaction to be applied
-2. `timestamp` is a `number` representing the timestamp of the transaction.
+- `txId` is a `string` representing the hash of the transaction to be applied.
+- `timestamp` is a `number` representing the timestamp of the transaction.
 
 ```ts
 let txId: string
@@ -23,4 +23,4 @@ const applyResponse = dapp.createApplyResponse(txId, tx.timestamp)
 return applyResponse
 ```
 
-`createApplyResponse` will be used to tell Shardus that the tx has been applied.
+`createApplyResponse` will be used to tell Shardus that the transaction has been applied.

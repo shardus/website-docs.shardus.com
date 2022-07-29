@@ -1,6 +1,6 @@
 # updateAccountFull
 
-This function is used to apply the created wrappedResponse to update our account data. Call [applyResponseAddState](../applyResponseAddState) exposed by Shardus and pass in the following from the code below:
+This function is used to apply the created `wrappedResponse` to update our account data. Call [applyResponseAddState](../applyResponseAddState) exposed by Shardus and pass in the following from the code below:
 
 ```javascript
 updateAccountFull(wrappedData, localCache, applyResponse) {
@@ -17,7 +17,7 @@ updateAccountFull(wrappedData, localCache, applyResponse) {
   dapp.applyResponseAddState(
     applyResponse,
     updatedAccount,
-    updatedAccount,
+    localCache,
     accountId,
     applyResponse.txId,
     applyResponse.txTimestamp,

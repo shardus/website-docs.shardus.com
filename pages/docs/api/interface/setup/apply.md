@@ -1,12 +1,12 @@
 # apply
 
-Shardus expects a very important function called `apply` to be passed into `setup`. `apply` is where all your business logic lives that mutates your application state. Within `apply`, you also need to create a transactionId by hashing the transaction object, and pass it into `createApplyResponse`, which is another method exposed by shardus, along with the transaction timestamp as the second paremeter. This response should get returned at the end of `apply`.
+Shardus expects a very important function called `apply` to be passed into `setup`. `apply` is where all your business logic lives that mutates your application state. Within `apply`, you also need to create a transaction ID by hashing the transaction object, and pass it, along with the transaction timestamp as the second parameter, into [createApplyResponse()](../createApplyResponse), which is another method exposed by Shardus. This response should get returned at the end of `apply`.
 
-> It's crucially important that this is the only place where state data gets changed because all nodes basically run the apply function simultaniously. This enables the nodes to agree on what order the changes to state were made, and to be in sync with each other.
+> It's crucially important that this is the only place where state data gets changed, because all nodes basically run the `apply` function simultaneously. This allows the nodes to agree on what order the changes to the state were made, and to be in sync with each other.
 ---
-> When you mutate your application state data anywhere outside of `apply`, you end up causing the nodes to become out of sync. If you try this while running a network of nodes, you can actually see the node getting kicked out on the monitor server. Every other node has different state data than the one who changed his state prematurely, and they will boot him from the network.
+> When you mutate your application state data anywhere outside of `apply`, you take the nodes out of sync. If you try this while running a network of nodes, you can actually see the node getting kicked out on the monitor server. Every other node has different state data than the one that changed its state prematurely, and they will boot it from the network.
 
-The example shown in the main Interface Overview displayed a good example of what basically goes on in apply
+The following is a good example of what basically goes on in `apply`:
 
 ```javascript
 if (type === "transfer") {
@@ -21,11 +21,11 @@ if (type === "transfer") {
 }
 ```
 
-> For an simple transaction type like a transfer, all that's required to happen is the source account balance getting deducted and the target account balance getting credited. That's it! You can see how writing decentralized applications just got a whole lot easier.
+> For a simple transaction type like a transfer, all that's required to happen is the source account balance getting deducted and the target account balance getting credited. That's it! You can see how writing decentralized applications just got a whole lot easier.
 
-Let's take a look at a more fully fledged chat application's implementation of apply...
+Let's take a look at a more fully fledged chat application's implementation of `apply`:
 
-> A good way of implementing the `apply` function is to use a switch statement, just like we did in `validateTransaction`. This way, only the code in the case for the specific transaction type will be executed. Any time you need to access account states to modify data, you need to grab it from the second argument `wrappedStates` that gets passed in to apply.
+> A good way of implementing the `apply` function is to use a `switch` statement, just like we did in `validateTransaction`. This way, only the code in the case for the specific transaction type will be executed. Any time you need to access account states to modify data, you need to grab it from the second argument, `wrappedStates`, that gets passed into `apply`.
 
 ```javascript
 // wrappedStates is a wrappedVersion of all the account states, which it
@@ -101,4 +101,4 @@ apply(tx, wrappedStates) {
 }
 ```
 
-> `wrappedStates` is a very important argument that is generated from the keys sent in from the `getKeysFromTransaction` function. You need to parse the the account data from wrappedStates in order to properly modify any account state for that particular transaction.
+> `wrappedStates` is a very important argument that is generated from the keys sent in from the [crack](./crack) function. You need to parse the account data from `wrappedStates` in order to properly modify any account state for that particular transaction.

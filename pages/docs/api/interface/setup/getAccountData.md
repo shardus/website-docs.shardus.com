@@ -1,12 +1,12 @@
 # getAccountData
 
-This function is required to be implemented by the app developer for internal use by shardus. It takes in 3 parameters.
+This function is required to be implemented by the app developer for internal use by Shardus. It takes in 3 parameters.
 
-1. `accountStart` The start of accountId's in the range shardus wants to grab from
-2. `accountEnd` The end of accountId's in the range shardus wants to grab from
-3. `maxRecords` The maximum number of account records shardus wants to get back from the function
+- `accountStart` - the start of account IDs in the range Shardus wants to grab from
+- `accountEnd` - the end of account IDs in the range Shardus wants to grab from
+- `maxRecords` - the maximum number of account records Shardus wants to get back from the function
 
-> Because shardus allows you to use whatever kind of database you choose, this is required by the app developer to implement so shardus can grab the account data for it's internal uses.
+> Because Shardus allows you to use whatever kind of database you choose, this is required to be implemented by the app developer, so Shardus can grab the account data for its internal uses.
 
 ```javascript
 getAccountData(accountStart, accountEnd, maxRecords) {

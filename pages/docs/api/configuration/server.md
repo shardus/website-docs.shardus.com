@@ -130,7 +130,7 @@ The `crypto` parameter is an `Object` which can pass in the following parameter:
 }
 ```
 
-> The `hashKey` parameter is a `String` that is used to initialize the `crypto` module, which is used for the cryptographic functions within Shardus
+> The `hashKey` parameter is a `String` that is used to initialize the `crypto` module, which is used for the cryptographic functions within Shardus.
 
 ## p2p
 
@@ -227,15 +227,15 @@ The `ip` parameter is an `Object` which can pass in the following parameters:
 
 > The `externalIp` parameter is a `String` specifying the external IP address exposed by the node running the network.
 
-> The `externalPort` parameter is a `Integer` specifying the external port exposed by the node running the network.
+> The `externalPort` parameter is an `Integer` specifying the external port exposed by the node running the network.
 
 > The `internalIp` parameter is a `String` specifying the internal IP address exposed by the node running the network.
 
-> The `internalPort` parameter is a `Integer` specifying the internal port exposed by the node running the network.
+> The `internalPort` parameter is an `Integer` specifying the internal port exposed by the node running the network.
 
 ## network
 
-The `network` parameter is an `Object` which can pass in the following parameters:
+The `network` parameter is an `Object` which can pass in the following parameter:
 
 ```json
 "network": {
