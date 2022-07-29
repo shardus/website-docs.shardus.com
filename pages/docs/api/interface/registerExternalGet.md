@@ -38,6 +38,6 @@ dapp.registerExternalGet(
 
 <Callout emoji="💡" type="default">
 
-Get used to using and understanding [getLocalOrRemoteAccount](./getLocalOrRemoteAccount). This method will need to be utilized in the majority of your API routes because of the way sharding works with `shardus`
+Get used to using and understanding [getLocalOrRemoteAccount](./getLocalOrRemoteAccount). This method will need to be utilized in the majority of your API routes because of the way sharding works with Shardus.
 
 </Callout>

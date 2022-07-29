@@ -7,13 +7,13 @@ import Callout from 'nextra-theme-docs/callout'
 1. `address` is a `string` that represents the address of the global account
 2. `value` is the transaction object that will be submitted to the network
 3. `when` is the time the transaction should be applied to the network
-4. `source` is the source account originated the transaction
+4. `source` is the account that originated the transaction
 
 ## Why is this important?
 
 <Callout emoji="💡" type="warning">
 
-`setGlobal` was a method we decided to add to shardus when we found the need for global variables. [Liberdus](https://liberdus.com) required global variables that we were able to add by introducing the `setGlobal` method. It works by submitting a transaction with a special `global` flag that aims to eventually get applied to every shard in the network. Since normal accounts are only stored in a single shard, it defeated the purpose of scalability since the global variables needed to be accessed by every node frequently. Shown below is an example of the `tally` transaction for scoring the votes for all the proposal submissions to change the network parameters.
+`setGlobal` was a method we decided to add to Shardus when we found the need for global variables. [Liberdus](https://liberdus.com) required global variables that we were able to add by introducing the `setGlobal` method. It works by submitting a transaction with a special `global` flag that aims to eventually get applied to every shard in the network. Since normal accounts are only stored in a single shard, it defeated the purpose of scalability since the global variables needed to be accessed frequently by every node. Shown below is an example of the `tally` transaction for scoring the votes for all the proposal submissions to change the network parameters.
 
 </Callout>
 

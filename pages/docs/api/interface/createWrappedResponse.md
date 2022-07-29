@@ -4,13 +4,13 @@ import Callout from 'nextra-theme-docs/callout'
 
 `createWrappedResponse` is a function that needs to be called in order to return a `wrappedResponse` in the [getRelevantData](setup/getRelevantData.md) function of [setup](setup/README.md).
 
-This function needs 5 parameters passed into it.
+This function needs 5 parameters passed into it:
 
-1. `accountId` - The account id that's passed into `getRelevantData`
-2. `accountCreated` - A boolean indicating whether or not an account was created for the first time
-3. `accountHash` - The hash field on the account
-4. `accountTimestamp` - The timestamp field on the account
-5. `account` - The entire account object
+1. `accountId` - the account ID that's passed into `getRelevantData`
+2. `accountCreated` - a boolean indicating whether or not an account was created for the first time
+3. `accountHash` - the hash field on the account
+4. `accountTimestamp` - the timestamp field on the account
+5. `account` - the entire account object
 
 <Callout emoji="💡" type="default">
 

@@ -1,6 +1,6 @@
 # registerExceptionHandler
 
-`registerExceptionHandler` is an essential function that must be invoked after calling [setup](./setup) in your application. It is used to register exit handlers for exceptions such as `'uncaughtException'` and `'unhandledRejection'`. You can see below how the function works under the hood.
+`registerExceptionHandler` is an essential function that must be invoked after calling [setup](./setup/README) in your application. It is used to register exit handlers for exceptions such as `uncaughtException` and `unhandledRejection`. You can see below how the function works under the hood.
 
 ```ts
 /**

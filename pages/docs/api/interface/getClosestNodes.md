@@ -2,22 +2,22 @@ import Callout from 'nextra-theme-docs/callout'
 
 # getClosestNodes
 
-`getClosestNodes` is a useful function that returns a list of the closest nodeId's to the specified `hash`. The function takes in two parameters:
+`getClosestNodes` is a useful function that returns a list of the closest node IDs to the specified `hash`. The function takes in two parameters:
 
-1. `hash` is a string that represents the hash from which to compare the nodeId's to.
-2. `count` is a number that represents the number of nodeId's to return in the list.
+- `hash` is a `string` that represents the hash with which to compare the node IDs.
+- `count` is a `number` that represents the number of node IDs to return in the list.
 
 <Callout emoji="💡" type="default">
 
-This function can be **extremely** useful for when you need the network to automatically change the state in some way on it's own. This function allows you to grab the id's of the closest nodes to a given hash, so if you seemingly randomize the hash, you can have the network do things like randomly choose 1 node to submit a transaction. 
+This function can be **extremely** useful when you need the network to automatically change the state in some way on its own. This function allows you to grab the IDs of the closest nodes to a given hash, so if you seemingly randomize the hash, you can have the network do things like randomly choose 1 node to submit a transaction.
 
-> We found this useful if you're building a *confirmation email transaction*. Since Shardus transactions get routed to shards and __there's always going to be more than 1 node per shard__, we need a way to have only 1 node actually send the verification email because we don't want to spam the user. For security reasons, it's better if this node is chosen at random as well.
+> We found this useful if you're building a **confirmation email transaction**. Since Shardus transactions get routed to shards and __there's always going to be more than 1 node per shard__, we need a way to have only 1 node actually send the verification email, because we don't want to spam the user. For security reasons, it's better if this node is chosen at random as well.
 
 </Callout>
 
 ---
 
-This can be accomplished by using `getClosestNodes`. So imagine 5 nodes per shard, and destructuring the first (closest) item in the list. Then we can check to see if we are the closest and continue executing the code. The closest node must also gossip the hash of the verification number so that when the next validate transaction occurs, the other nodes will know what to verify with.
+This can be accomplished by using `getClosestNodes`. So, imagine 5 nodes per shard, and destructuring the first (closest) item in the list. Then we can check to see if we are the closest and continue executing the code. The closest node must also gossip the hash of the verification number so that when the next transaction validation occurs, the other nodes will know what to verify with.
 
 ```ts
 switch (tx.type) {

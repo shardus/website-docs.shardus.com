@@ -1,6 +1,8 @@
 # getNode
 
-`getNode` is a function that is used to return a nodes information. It takes one `string` parameter `nodeId` as an argument which represents the id of the node to retrieve.
+`getNode` is a function that is used to return a node's information. It takes one parameter:
+
+- `nodeId` is a `string` which represents the ID of the node to retrieve.
 
 ---
 
@@ -24,4 +26,4 @@ The node information returned resembles the following:
 }
 ```
 
-Getting access to the id of the node requires the [getNodeId](./getNodeId) function.
+Getting access to the ID of the node requires the [getNodeId](./getNodeId) function.

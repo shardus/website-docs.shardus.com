@@ -2,7 +2,7 @@ import Callout from 'nextra-theme-docs/callout'
 
 # set
 
-`set` is a function that acts like an sudo version of [put](./put). Set is useful for initialization purposes, because it allows the first node in the network to bypass the usual security measures of the network. In other words, the transaction will go through even if the node submitting it is the only node in the network.
+`set` is a function that acts like a sudo version of [put](./put). Set is useful for initialization purposes, because it allows the first node in the network to bypass the usual security measures of the network. In other words, the transaction will go through even if the node submitting it is the only node in the network.
 
 <Callout emoji="💡" type="default">
 

@@ -6,9 +6,9 @@ return a result object with the source and target keys. The source and target
 keys together should comprise the keys of all accounts that are affected
 by the transaction.
 
-> Once again, a switch statement is helpful here to generate the keys based on the type of transaction it receives.
+> Once again, a `switch` statement is helpful here to generate the keys based on the type of transaction it receives.
 ---
-> If a transaction is meant to modify only one account state, it usually means they're modifying their own account on the network. This could be something like registering an account, setting a user handle, or adding a friend to their friend list.
+> If a transaction is meant to modify only one account state, it usually means a user is modifying their own account on the network. This could be something like registering an account, setting a user handle, or adding a friend.
 
 ```javascript
 // Create a result object
