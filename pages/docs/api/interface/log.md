@@ -24,7 +24,7 @@ function nodeReward(address: string, nodeId: string): void {
 
 <Callout emoji="💡" type="default">
 
-You can also use `console.log` instead of, or in conjunction with `dapp.log`. There will separate individual .log files for both application logs (`app.log`) and console logs (`out.log`).
+You can also use `console.log()` instead of, or in conjunction with, `dapp.log()`. There will be separate files for both application logs (`app.log`) and console logs (`out.log`).
 
 ![logs](/img/log_files.png)
 

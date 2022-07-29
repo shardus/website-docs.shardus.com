@@ -2,9 +2,11 @@ import Callout from 'nextra-theme-docs/callout'
 
 # getLatestCycles
 
-`getLatestCycles` is a function that returns an array of cycles in the cycle chain history starting from the current cycle. It takes in a single parameter: `amount` which is a `number` representing the number of cycles you wish to return.
+`getLatestCycles` is a function that returns an array of cycles in the cycle chain history starting from the current cycle. It takes in a single parameter:
 
-The cycle objects returned by `getLatestCycles` resemble something like this:
+- `amount` is a `number` representing the number of cycles you wish to return.
+
+The cycle objects returned by `getLatestCycles` resemble this:
 
 ```json
 {

@@ -4,4 +4,4 @@ This section provides the documentation for all the available methods and config
 
 [Configuration](./configuration/README) will tell you all about the available configuration options for your application.
 
-[Interface](./interface/README) will tell you all about the available methods shardus exposes to your application.
+[Interface](./interface/README) will tell you all about the available methods Shardus exposes to your application.

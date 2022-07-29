@@ -2,7 +2,7 @@ import Callout from 'nextra-theme-docs/callout'
 
 # getLocalOrRemoteAccount
 
-`getLocalOrRemoteAccount` is an essential method to query account information when developing with Shardus. Sharded networks take application state and split it between many shards, each of which could vary in size depending on the network configuration. This means that when some node gets a request for data, it cannot simply rely on the data being stored locally. Instead it needs to check IF he has the data locally and then return it, otherwise it will need to send a request to a node in the shard that does have the data locally. All this complexity is handled by utilizing `getLocalOrRemoteAccount`.
+`getLocalOrRemoteAccount` is an essential method to query account information when developing with Shardus. Sharded networks take the application state and split it between many shards, each of which could vary in size depending on the network configuration. This means that when some node gets a request for data, it cannot simply rely on the data being stored locally. Instead it needs to check _whether_ it has the data locally and, if so, return it; otherwise, it will need to send a request to a node in the shard that does have the data locally. All this complexity is handled by utilizing `getLocalOrRemoteAccount`.
 
 <Callout emoji="💡" type="warning">
 
