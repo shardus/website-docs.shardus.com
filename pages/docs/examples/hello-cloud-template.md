@@ -2,16 +2,16 @@ import Callout from "nextra-theme-docs/callout"
 
 # Hello Cloud
 
-Hello Cloud is a simple dapp designed to help you learn the fundamentals of
-shardus. The function of the dapp is simple: allow the user to set some small
+Hello Cloud is a simple dApp designed to help you learn the fundamentals of
+Shardus. The function of the dApp is simple: allow the user to set some small
 state into the network (as a number) and then read that state back.
 
 If you went through the [quickstart guide](/docs/quickstart), you
 will already have been introduced to the Hello Cloud dapp.
 
-<Callout emoji="!!" type="default">
+<Callout emoji="❗" type="default">
 
-This app is a typescript version of the app you've seen on [quickstart](../quickstart) section
+This app is a TypeScript version of the app you've seen in the [quickstart](../quickstart) section.
 
 </Callout>
 
@@ -30,18 +30,18 @@ npm install
 
 Head on into the repo and open up `index.ts`. This is where you'll find all the
 real juicy goods. This repo has been made to be self explanatory - you'll find
-detailed explanation of all the ins and outs right there within the code.
+detailed explanations of all the ins and outs right there within the code.
 
 ## Explanation
 
 Below you'll find more high level explanations. Once you finish reading
-through both the code and the below, you should have enough understanding of shardus
-to start developing your own dapps.
+through both the code and the below, you should have enough understanding of Shardus
+to start developing your own dApps.
 
 ### The Types
 
 The most important type you'll find is the `Account` type. This type represents
-the way we store our data. This type will change the most from dapp to dapp.
+the way we store our data. This type will change the most from dApp to dApp.
 
 ```ts
 type Account = {
@@ -51,9 +51,9 @@ type Account = {
 }
 ```
 
-The `id` and `timestamp` fields will be universal across dapps, however the
+The `id` and `timestamp` fields will be universal across dApps, however the
 `state` field is totally up to us here in Hello Cloud. This is where we keep
-the number we're saving into the cloud. If we were developing a dapp that, say,
+the number we're saving into the cloud. If we were developing a dApp that, say,
 tracked Koala Bear movement (for no particular reason at all), maybe instead of
 a `state` key, we'd have something more like
 `{ id, timestamp, name: string, age: number, lastSeenLocation: GeoPoint }` or something
@@ -61,10 +61,10 @@ like that.
 
 ---
 
-We save our accounts into an object keyed with the accoundId. This is a convenient
-way to hold on to accounts when using an in memory representation like this and we'll
-find it across many shardus dapps. If we were saving into a database instead, we
-could add an index on accountId for fast lookups.
+We save our accounts into an object keyed with the account ID. This is a convenient
+way to hold on to accounts when using an in-memory representation like this and we'll
+find it across many Shardus dApps. If we were saving into a database instead, we
+could add an index on `accountId` for fast lookups.
 
 ```ts
 type Accounts = {
@@ -82,7 +82,7 @@ Nodes in other shards will have a different collection of `Account`s.
 ### The Setup
 
 Most of the real application logic goes into the `shardus.setup({...})` call.
-Pay particular attention to the `apply(...)` and the `updateAccountFull(...)` functions.
+Pay particular attention to the `apply(...)` and `updateAccountFull(...)` functions.
 
 #### apply
 
@@ -133,7 +133,7 @@ updateAccountFull(wrappedState, localCache: Account, applyResponse) {
 },
 ```
 
-Once the nodes in the network have agreed upon what the new state should be by
+Once the nodes in the network have agreed on what the new state should be by
 reaching consensus on their `apply` results, each node needs to update its internal
 representation of the state. It's in this function we do that, particularly
 in the line `accounts[accountId] = updatedAccount`.
@@ -141,5 +141,5 @@ in the line `accounts[accountId] = updatedAccount`.
 ## Exploration
 
 > We've covered some of the most important bits in here, but there is more going on in the code.
-> We highly encourage you to read through the code in the Hello Cloud dapp, and in the next
+> We highly encourage you to read through the code in the Hello Cloud dApp, and in the next
 > apps you'll find here in the examples guide, until you reach the level of grokking you desire.

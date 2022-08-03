@@ -492,7 +492,7 @@ Here's a more in-depth explanation of [createApplyResponse](./api/interface/crea
 
 #### crack()
 The [crack](./api/interface/setup/crack) function is responsible for parsing the public keys of the accounts being affected from this transaction
-and returning a result object that resembles this:
+and returns a `result` object that resembles this:
 ```ts
 {
   sourceKeys: [tx.from],
@@ -520,7 +520,7 @@ and the `targetKeys` property should contain the public key(s) of the account(s)
   },
 ```
 #### setAccountData()
-After the `apply` function has done its duty, [setAccountData()](./api/interface/setup/setAccountData) will update our accounts object using a list of account records that Shardus passes to this function.
+After the `apply` function has done its duty, [setAccountData()](./api/interface/setup/setAccountData) will update our `accounts` object using a list of account records that Shardus passes to this function.
 Use the following code to implement this function.
 ```ts
   setAccountData(accountsToSet: Account[]) {
@@ -633,7 +633,7 @@ To implement this, loop through all the accounts in our database and add them to
 
 #### getAccountDataByRange
 [getAccountDataByRange()](./api/interface/setup/getAccountDataByRange) will look almost identical to `getAccountData`.
-The only difference in this function is that we add another range filter that looks for accounts with `timestamp` fields between the arguments `tsStart` and `tsEnd`.
+The only difference in this function is that we add another range filter that looks for accounts with `timestamp` fields between the arguments `dateStart` and `dateEnd`.
 This is what it looks like:
 
 ```ts
@@ -709,9 +709,9 @@ To implement [getAccountDataByList()](./api/interface/setup/getAccountDataByList
 #### updateAccountFull()
 The [updateAccountFull](./api/interface/setup/updateAccountFull) function is used to update an account in our application's database. It provides three arguments.
 
-- `wrappedState` - The wrapped data of the account to update
-- `localCache` - Your local application cache
-- `applyResponse` - The response object generated from the `apply` function
+- `wrappedState` - the wrapped data of the account to update
+- `localCache` - your local application cache
+- `applyResponse` - the response object generated from the `apply` function
 
 Grab the `accountId`, `accountCreated`, and `data` fields from `wrappedState` and put them into separate variables. Create two more variables, `hashBefore` and `hashAfter`: `hashBefore` should be the account's current hash, and `hashAfter` will be calculated using the `crypto` module. Then, update the account hash using `hashAfter` and your database with the new account like so:
 
@@ -755,7 +755,7 @@ We don't really need to worry about [updateAccountPartial()](./api/interface/set
 
 #### calculateAccountHash()
 
-As the name suggests, [calculateAccountHash()](./api/interface/setup/calculateAccountHash) is responsible for returning a new hash from the `account` that is passed in as an argument. We can easily do this using our [crypto](./tools/crypto-utils) module that we imported earlier. First, reset the account hash to an empty `string` so that we know the hash will change only if the data from some other field on the `account` changed. Use the following code for implementing this function:
+As the name suggests, [calculateAccountHash()](./api/interface/setup/calculateAccountHash) is responsible for returning a new hash from the `account` that is passed in as an argument. We can easily do this using our [crypto](./tools/crypto-utils) module that we imported earlier. Use the following code to implement this function:
 
 ```ts
 
@@ -793,12 +793,12 @@ We are going to be creating a `CLI` in order to interact with our server because
 
 <Callout emoji="❗" type="warning">
 
-You _could_ use something like [Postman](https://www.postman.com/) and hit the inject endpoint with different transaction types for this example application, if you wanted to, since we aren't signing transactions yet. We will start signing transactions in one of our next examples ([chat application](./chat-app-template.md)).
+You _could_ use something like [Postman](https://www.postman.com/) and hit the inject endpoint with different transaction types for this example application, if you wanted to, since we aren't signing transactions yet. We will start signing transactions in one of our next examples ([chat application](./examples/chat-app-template)).
 
 </Callout>
 
 #### Create client.ts
-Now that we have the shardus server set up, we'll interact with it through a cool little CLI app. To do that, first create `client.ts` inside your `./src/`.
+Now that we have the Shardus server set up, we'll interact with it through a cool little CLI app. To do that, first create `client.ts` inside your `./src/`.
 
 #### Import modules
 After you created an empty TypeScript file `./src/client.ts`, add the following lines of code to it.
