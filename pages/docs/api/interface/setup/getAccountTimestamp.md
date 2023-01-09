@@ -1,3 +1,5 @@
+import Callout from 'nextra-theme-docs/callout'
+
 # getAccountTimestamp
 
 This function is not required to be implemented by the app developer for internal use by Shardus. It returns the timestamp of an account given its account address, and it takes in 2 parameters:

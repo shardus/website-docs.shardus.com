@@ -1,3 +1,5 @@
+import Callout from 'nextra-theme-docs/callout'
+
 # getJoinData
 
 This function is not required to be implemented by the app developer for internal use by Shardus. It takes in no parameters

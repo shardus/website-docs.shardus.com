@@ -1,3 +1,5 @@
+import Callout from 'nextra-theme-docs/callout'
+
 # getStateID
 
 This function is not required to be implemented by the app developer for internal use by Shardus. It returns the State ID for a given Account Address. Basically, It does this by returning a hash of the account. It takes in 1 parameter, and has another that has a default value of true:

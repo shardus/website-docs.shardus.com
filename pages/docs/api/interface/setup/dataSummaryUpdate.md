@@ -1,3 +1,5 @@
+import Callout from 'nextra-theme-docs/callout'
+
 # dataSummaryUpdate
 
 This function is not required to be implemented by the app developer for internal use by Shardus. It takes in 2 parameters:
