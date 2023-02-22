@@ -37,6 +37,7 @@ Shardus requires you to implement all the necessary SDK functions to be set up w
 * [updateAccountPartial](./updateAccountPartial)*
 * [validate](./validate)*
 * [validateJoinRequest](./validateJoinRequest)
+* `validateTransaction` (deprecated - please use `validate()` instead)
 * `validateTxnFields` (deprecated - please use `validate()` instead)
 
 ---
