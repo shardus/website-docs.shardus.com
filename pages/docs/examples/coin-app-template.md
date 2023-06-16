@@ -44,7 +44,7 @@ yarn add -D cross-env execa pm2 shelljs yarpm
 
 <Callout emoji="⚠️" type="warning">
 
-Make sure you are using the Node `18.16.0`. If you are using a different node version than `18.16.0` you'll receive an error message that looks something like this when you run your application:
+Make sure you are using the Node `16.11.1`. If you are using a different node version than `16.11.1` you'll receive an error message that looks something like this when you run your application:
 
 </Callout>
 
@@ -52,7 +52,7 @@ Make sure you are using the Node `18.16.0`. If you are using a different node ve
 Error: Cannot find module '/home/user/code/shardus/applications/chat-app/node_modules/sqlite3/lib/binding/node-v72-linux-x64/node_sqlite3.node'
 ```
 
-> If you get this error, you need to remove your `node_modules` folder and your package lockfile. Then, run `nvm use 18.16.0` and finally `npm install` (OR `yarn install`).
+> If you get this error, you need to remove your `node_modules` folder and your package lockfile. Then, run `nvm use 16.11.1` and finally `npm install` (OR `yarn install`).
 
 Your `package.json` file should look something like this now:
 

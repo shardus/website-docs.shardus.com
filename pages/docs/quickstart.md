@@ -15,11 +15,11 @@ Start by cloning `Hello Shardus`:
 ```bash
 git clone https://gitlab.com/shardus/applications/hello-shardus.git
 ```
-Make sure that you have the correct node version which is `18.16.0`
+Make sure that you have the correct node version which is `16.11.1`
 
 ```bash
-nvm install 18.16.0
-nvm use 18.16.0
+nvm install 16.11.1
+nvm use 16.11.1
 ```
 Now that the correct node version is satisfied, go ahead and play with `hello-shardus` by doing
 ```bash

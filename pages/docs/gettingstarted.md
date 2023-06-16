@@ -15,7 +15,7 @@ Skip this entire step if you successfully followed [quickstart](./quickstart) se
 
 We need a set of tools with specific versions to successfully use @shardus/core. This tech stack includes the following:
 
-- Node version 18.16.0
+- Node version 16.11.1
 - Python 3.9 (or latest)
 - Rust
 
@@ -28,11 +28,11 @@ Install `nvm` [here](https://github.com/nvm-sh/nvm).
 
 After installing `nvm` on your machine, you are then able to switch to the specific Node version by entering
 ```bash
-nvm install 18.16.0
+nvm install 16.11.1
 ```
 and
 ```bash
-nvm use 18.16.0
+nvm use 16.11.1
 ```
 
 ### Configuring Python 3
@@ -76,7 +76,7 @@ For other systems see [this](https://forge.rust-lang.org/infra/other-installatio
 ### Switch Node version
 Make sure that you are using the correct Node version by doing
 ```
-nvm use 18.16.0
+nvm use 16.11.1
 ```
 
 ## Let's start the project
