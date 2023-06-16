@@ -8,7 +8,7 @@ Now that you have satisfied the prerequisites for the Shardus tech stack, you ca
 ## Switch Node version
 Make sure that you are using the correct Node version by doing:
 ```
-nvm use 16.11.1
+nvm use 18.16.0
 ```
 
 ## Starting a Node.js project

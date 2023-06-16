@@ -4,7 +4,7 @@ import Bleed from 'nextra-theme-docs/bleed'
 # Setting up the system
 Developing decentralized applications on top of Shardus usually requires a set of these packages in the Shardus SDK described [here](../tools/README). Before going ahead with development, developers may need to configure their system as follows.
 
-- Node.js (16.11.1)
+- Node.js (18.16.0)
 - npm (8.0.0)
 - Python3.9 (or latest)
 - [Rust](https://www.rust-lang.org/tools/install)
@@ -18,11 +18,11 @@ Install `nvm` [here](https://github.com/nvm-sh/nvm).
 
 After installing `nvm` on your machine, you are then able to switch to the specific Node version by entering
 ```bash
-nvm install 16.11.1
+nvm install 18.16.0
 ```
 and
 ```bash
-nvm use 16.11.1
+nvm use 18.16.0
 ```
 
 ### Configuring Python 3
