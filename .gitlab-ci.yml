@@ -4,7 +4,7 @@ variables:
   NODE_ENV: "gitlab"
 
 before_script:
-  - npm install -g pnpm
+  - npm install -g pnpm@7.18.0
   - pnpm config set store-dir .pnpm-store
 
 cache:
