@@ -9,6 +9,7 @@ specifiers:
   next: ^12.1.0
   nextra: ^2.0.0-alpha.24
   nextra-theme-docs: ^2.0.0-alpha.23
+  pnpm: ^7.18.0
   postcss: ^8.4.7
   react: ^17.0.2
   react-dom: ^17.0.2
@@ -25,6 +26,7 @@ dependencies:
   next: 12.1.0_sfoxds7t5ydpegc3knd667wn6m
   nextra: 2.0.0-alpha.24_react@17.0.2
   nextra-theme-docs: 2.0.0-alpha.23_zktdhiadde2q3pnefglgcp7cnq
+  pnpm: 7.33.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-intersection-observer: 8.33.1_react@17.0.2
@@ -1963,6 +1965,12 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
     dev: true
+
+  /pnpm/7.33.2:
+    resolution: {integrity: sha512-rDTWdW6vMPTI7B01byiA3rZa0tCnoMFwX8oT88R9ouvnBfQ10YZuAffcKln199Sw7Oes0t9TgbA/dFoDb6D1tQ==}
+    engines: {node: '>=14.6'}
+    hasBin: true
+    dev: false
 
   /postcss-js/4.0.0_postcss@8.4.7:
     resolution: {integrity: sha512-77QESFBwgX4irogGVPgQ5s07vLvFqWr228qZY+w6lW599cRlK/HmnlivnnVUxkjHnCu4J16PDMHcH+e+2HbvTQ==}
