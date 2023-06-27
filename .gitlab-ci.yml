@@ -16,7 +16,7 @@ cache:
 
 pages:
   script:
-    - pnpm install && pnpm build && pnpm run export
+    - pnpm install --no-frozen-lockfile && pnpm build && pnpm run export
     - rm -rf public && mkdir public
     - cp -r out/* public/.
   artifacts:
